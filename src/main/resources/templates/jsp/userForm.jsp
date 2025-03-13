@@ -36,7 +36,6 @@
       <table class="table table-hover table-striped">
         <thead>
         <tr>
-          <th>用户id</th>
           <th>用户名</th>
           <th>密码</th>
           <th>操作</th>
@@ -45,12 +44,11 @@
         <tbody>
         <c:forEach var="user" items="${requestScope.get('userList')}">
           <tr>
-            <td>${user.id}</td>
-            <td>${user.userName}</td>
+            <td>${user.username}</td>
             <td>${user.password}</td>
             <td>
-              <a href="${pageContext.request.contextPath}/user/toUpdateUser?id=${user.getId()}">更改</a> |
-              <a href="${pageContext.request.contextPath}/user/delUser/?id=${user.getId()}">删除</a>
+              <a href="${pageContext.request.contextPath}/user/toUpdateUser?username=${user.getUsername()}">更改</a> |
+              <a href="${pageContext.request.contextPath}/user/delUser/?username=${user.getUsername()}">删除</a>
             </td>
           </tr>
         </c:forEach>

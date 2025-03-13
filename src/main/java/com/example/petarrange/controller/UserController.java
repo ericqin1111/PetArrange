@@ -51,7 +51,7 @@ public class UserController {
         return "redirect:/user/allUser";
     }
 
-    //更新用户，与添加用户流程基本一样
+    //更新用户
     @RequestMapping("toUpdateUser")
     public String toUpdateUser(Model model,String username){
 

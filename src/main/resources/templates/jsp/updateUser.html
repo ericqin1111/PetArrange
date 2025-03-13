@@ -18,8 +18,7 @@
         </div>
     </div>
     <form action="${pageContext.request.contextPath}/user/updateUser" method="post">
-        <input type="hidden" name="id" value="${user.id}"/>
-        用户名：<input type="text" name="userName" value="${user.userName}"/>
+        用户名：<input type="text" name="userName" value="${user.username}"/>
         密&nbsp;&nbsp;码：<input type="text" name="password" value="${user.password}"/>
         <input type="submit" value="提交"/>
     </form>

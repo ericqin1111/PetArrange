@@ -1,0 +1,52 @@
+ /*基本样式重置 */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* 容器样式，用于包含侧边栏和主要内容 */
+.container {
+    display: flex;
+    flex-direction: row;
+    height: calc(300vh - /* 标题栏高度，这里假设为60px，需要根据实际情况调整 */ 60px);
+}
+.header{
+    width: 100%;
+    height: 200px;
+    color: yellow;
+}
+
+/* 侧边栏样式 */
+.aside {
+    width: 600px; /* 侧边栏宽度，可以根据需要调整 */
+    background-color: red;
+    color: red;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative; /* 为了使绝对定位的子元素能够相对于侧边栏定位 */
+
+}
+
+/* 顶部导航栏样式 */
+.nav {
+    background-color: blue;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    margin-bottom: 20px; /* 与主要内容之间的间距 */
+}
+
+/* 主要内容区域样式 */
+main {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* 占据剩余空间 */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* 标题栏样式（这里假设在common/top.html中定义，因此不在此CSS中详细写出） */
+/* 标题栏应该有一个固定的高度，并且通常位于页面的最顶部 */
+
+/* 其他可能的样式，如菜单项、链接等，可以在各自的Thymeleaf片段中定义 */

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<!--    <link rel="stylesheet" type="text/css" href="styles.css">-->
+
+</head>
+<body>
+<div>
+<header th:replace="common/top"></header> <!-- 标题栏 -->
+</div>
+<div class="container">
+    <aside th:replace="common/left"></aside> <!-- 左侧菜单栏 -->
+    <main>
+        <nav th:replace="common/nav" ></nav> <!-- 顶部导航栏 -->
+        <section>
+<!--            <div th:replace="jsp/index"></div>-->
+
+        </section>
+    </main>
+</div>
+
+</body>
+</html>

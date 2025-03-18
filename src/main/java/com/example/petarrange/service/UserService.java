@@ -20,5 +20,5 @@ public interface UserService {
     public List<User> selectAllUser();
 
     //根据用户名查询用户
-    public User findUserByName(String userName);
+    public User findUserByName(String username);
 }

@@ -3,6 +3,7 @@ package com.example.petarrange.controller;
 import com.example.petarrange.entity.Admin;
 import com.example.petarrange.service.AccountService;
 import com.example.petarrange.service.impl.AccountServiceImpl;
+import com.example.petarrange.service.impl.UserServiceImpl;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,6 +20,9 @@ public class AccountController {
 
     @Autowired
     AccountServiceImpl accountService;
+
+    @Autowired
+    UserServiceImpl userService;
     @GetMapping("loginForm") //前端页面通过/account/loginForm访问,进入登入页面
     public String loginForm(Model model){
         Admin admin=new Admin();
@@ -63,5 +67,7 @@ public class AccountController {
         session.invalidate(); // 使当前会话失效，清除所有的 session 数据
         return "redirect:/catalog/index"; // 重定向到首页或任何你想刷新页面的路径
     }
+
+
 
 }

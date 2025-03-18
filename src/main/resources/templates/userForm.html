@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+<header th:replace="~{common/top}"></header> <!-- 标题栏 -->
+</div>
+
+<div class="container">
+    <aside th:replace="~{common/left}"></aside> <!-- 左侧菜单栏 -->
+
+    <main>
+        <nav th:replace="~{common/nav}" ></nav> <!-- 顶部导航栏 -->
+        <section>
+
+                <table id="user2_form">
+                    <tr>
+                        <th>用户名</th>
+                        <th>密码</th>
+                    </tr>
+
+                        <div id="user1_form">
+                            <th:block th:each="user:${session.userList}">
+                                <tr>
+                                    <td th:text="${user.username}">用户1</td>
+                                    <td th:text="${user.password}">密码1</td>
+                                </tr>
+                            </th:block>
+                        </div>
+
+                </table>
+
+            <div class="pangination" id="pangination">
+                <tr>
+
+
+                    <th:block th:if="${session.totalPages<=5}">
+                        <button th:each="i:${#numbers.sequence(1,session.totalPages)}"
+                                th:text="${i}"
+                                th:id="pageBtn+${i}"
+                                th:data-page="${i}"></button>
+                    </th:block>
+
+
+                    <th:block th:if="${session.totalPages>5 && session.page<=5}">
+
+                        <button th:each="i:${#numbers.sequence(1,5)}"
+                                th:text="${i}"
+                                th:id="pageBtn+${i}"
+                                th:data-page="${i}"></button>
+                        <span>……</span>
+                        <button th:text="${session.totalPages}"
+                                th:id="${session.totalPages}"
+                                th:data-page="${session.totalPages}"></button>
+                    </th:block>
+
+                    <th:block th:if="${session.totalPages>5 && session.page>5 && session.page+2<=session.totalPages }">
+                        <button th:data-page="1" th:text="1" th:id="pageBtn1"></button>
+                        <span>……</span>
+                        <button th:each="i:${#numbers.sequence(${session.page}-2,${session.page}+2)}"
+                                th:text="${i}"
+                                th:id="pageBtn+${i}"
+                                th:data-page="${i}"></button>
+                        <button th:if="${session.page}"
+                                th:text="session.totalPages"
+                                th:id="${session.totalPages}"
+                                th:data-page="${session.totalPages}"></button>
+                    </th:block>
+
+                    <th:block th:if="${session.page>5 && session.page+2>session.totalPages && session.totalPages>5}">
+                        <button th:data-page="1" th:text="1" th:id="pageBtn1"></button>
+                        <span>……</span>
+                        <button th:each="i:${#numbers.sequence(${session.page}-2,${session.totalPages})}"
+                                th:text="${i}"
+                                th:id="pageBtn+${i}"
+                                th:data-page="${i}"></button>
+                    </th:block>
+                </tr>
+            </div>
+        </section>
+    </main>
+</div>
+
+<script src="/js/page.js"></script>
+</body>
+</html>

@@ -3,44 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="/js/jquery.js"></script>
 </head>
 <body>
-<div>
-<header th:replace="~{common/top}"></header> <!-- 标题栏 -->
+
+<div id="functionBar">
+    <section class="filter-section">
+        <input type="text" id="search" placeholder="输入用户名">
+        <button th:id="search">搜索</button>
+
+        <button th:id="addBtn">新增</button>
+        <button th:id="delBtn">删除</button>
+    </section>
+
+
 </div>
 
-<div class="container">
-    <aside th:replace="~{common/left}"></aside> <!-- 左侧菜单栏 -->
 
-    <main>
-        <nav th:replace="~{common/nav}" ></nav> <!-- 顶部导航栏 -->
-        <section>
-
-                <table id="user2_form">
-                    <tr>
+            <table id="user2_form">
+                <tr>
+                        <th></th>
                         <th>用户名</th>
                         <th>密码</th>
-                    </tr>
+                </tr>
 
-                        <div id="user1_form">
-                            <th:block th:each="user:${session.userList}">
-                                <tr>
-                                    <td th:text="${user.username}">用户1</td>
-                                    <td th:text="${user.password}">密码1</td>
-                                </tr>
-                            </th:block>
-                        </div>
+                <div id="user1_form">
+                    <th:block th:each="user:${session.userList}">
+                        <tr>
+                            <td><input type="checkbox" class="select-row"></td>
+                            <td th:text="${user.username}">用户1</td>
+                            <td th:text="${user.password}">密码1</td>
+                        </tr>
+                    </th:block>
+                </div>
 
-                </table>
+            </table>
 
             <div class="pangination" id="pangination">
                 <tr>
-
-
                     <th:block th:if="${session.totalPages<=5}">
                         <button th:each="i:${#numbers.sequence(1,session.totalPages)}"
                                 th:text="${i}"
-                                th:id="pageBtn+${i}"
+                                th:id="'pageBtn'+${i}"
                                 th:data-page="${i}"></button>
                     </th:block>
 
@@ -49,7 +53,7 @@
 
                         <button th:each="i:${#numbers.sequence(1,5)}"
                                 th:text="${i}"
-                                th:id="pageBtn+${i}"
+                                th:id="'pageBtn'+${i}"
                                 th:data-page="${i}"></button>
                         <span>……</span>
                         <button th:text="${session.totalPages}"
@@ -62,7 +66,7 @@
                         <span>……</span>
                         <button th:each="i:${#numbers.sequence(${session.page}-2,${session.page}+2)}"
                                 th:text="${i}"
-                                th:id="pageBtn+${i}"
+                                th:id="'pageBtn'+${i}"
                                 th:data-page="${i}"></button>
                         <button th:if="${session.page}"
                                 th:text="session.totalPages"
@@ -80,9 +84,7 @@
                     </th:block>
                 </tr>
             </div>
-        </section>
-    </main>
-</div>
+
 
 <script src="/js/page.js"></script>
 </body>

@@ -44,4 +44,7 @@ public interface UserMapper {
 
     @Select("SELECT COUNT(*) FROM signon")
     int getCount();
+
+    @Select("SELECT * FROM signon WHERE username LIKE CONCAT('%', #{username}, '%')")
+    List<User> findUsersByUsernameLike(@Param("username")String username);
 }

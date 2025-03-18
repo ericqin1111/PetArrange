@@ -106,7 +106,7 @@ public class UserController {
 
         Object pageStr=session.getAttribute("page");
         int page = (pageStr != null) ? (int)pageStr : 1;
-        int pageSize=1;
+        int pageSize=5;
         int offset=(page-1)*pageSize;
         int totalRecord=0;
         int totalPages=0;
@@ -130,13 +130,11 @@ public class UserController {
     @ResponseBody
     @GetMapping("/updateUser")
     public Map<String, Object> updateUser(@Param("page") int page, HttpSession session){
-        Object pageStr=session.getAttribute("page");
 
         Map<String,Object> map=new HashMap<>();
 
-        int currentPage = (pageStr != null) ? (int)pageStr : 1;
-
         int pageSize=5;
+        System.out.println("page"+page);
         int offset=(page-1)*pageSize;
         int totalRecord=0;
         int totalPages=0;
@@ -157,5 +155,11 @@ public class UserController {
         map.put("totalPages",totalPages);
 
         return map;
+    }
+
+    @GetMapping("/search")
+    @ResponseBody
+    public List<User> searchUserLike(String username){
+        return userService.findUsersByUsernameLike(username);
     }
 }

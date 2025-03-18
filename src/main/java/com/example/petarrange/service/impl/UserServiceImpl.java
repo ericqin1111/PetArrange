@@ -44,6 +44,12 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
+    @Override
+    public List<User> findUsersByUsernameLike(String username) {
+        System.out.println("1");
+        return userMapper.findUsersByUsernameLike(username);
+    }
+
     public List<User> selectPageUser(int limit,int offset){
         return userMapper.page(limit,offset);
     }

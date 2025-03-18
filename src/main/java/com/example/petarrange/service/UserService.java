@@ -21,4 +21,6 @@ public interface UserService {
 
     //根据用户名查询用户
     public User findUserByName(String username);
+
+    public List<User> findUsersByUsernameLike(String username);
 }

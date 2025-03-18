@@ -11,7 +11,7 @@ public interface ItemOrderService{
 
     public ItemOrderArray getOrderByCode(String code);
 
-    public Pager<ItemOrder> findBySqlReturnEntity(@Param("sql")String sql);
+//    public Pager<ItemOrder> findBySqlReturnEntity(@Param("sql")String sql);
 
     public ItemOrder findById(int id);
 

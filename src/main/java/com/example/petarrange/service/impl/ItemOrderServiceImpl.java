@@ -57,24 +57,24 @@ public class ItemOrderServiceImpl implements ItemOrderService {
     }
 
 
-    public Pager<ItemOrder> findBySqlReturnEntity(String sql) {
-        /**
-         * 执行分页
-         */
-        Integer pageSize = SystemContext.getPageSize();
-        Integer pageOffset = SystemContext.getPageOffset();
-        if(pageOffset==null||pageOffset<0) pageOffset = 0;
-        if(pageSize==null||pageSize<0) pageSize = 15;
-        String order = SystemContext.getOrder();
-        String sort = SystemContext.getSort();
-        Integer pageNum = null;
-        if(pageOffset == 0){
-            pageNum = 1;
-        }else{
-            pageNum = pageOffset/pageSize+1;
-        }
-        PageHelper.startPage(pageNum, pageSize);
-        Pager<ItemOrder> pages = new Pager<ItemOrder>(this.itemOrderMapper.findBySqlReturnEntity(sql));
-        return pages;
-    }
+//    public Pager<ItemOrder> findBySqlReturnEntity(String sql) {
+////        /**
+////         * 执行分页
+////         */
+////        Integer pageSize = SystemContext.getPageSize();
+////        Integer pageOffset = SystemContext.getPageOffset();
+////        if(pageOffset==null||pageOffset<0) pageOffset = 0;
+////        if(pageSize==null||pageSize<0) pageSize = 15;
+////        String order = SystemContext.getOrder();
+////        String sort = SystemContext.getSort();
+////        Integer pageNum = null;
+////        if(pageOffset == 0){
+////            pageNum = 1;
+////        }else{
+////            pageNum = pageOffset/pageSize+1;
+////        }
+////        PageHelper.startPage(pageNum, pageSize);
+////        Pager<ItemOrder> pages = new Pager<ItemOrder>(this.itemOrderMapper.findBySqlReturnEntity(sql));
+////        return pages;
+//    }
 }

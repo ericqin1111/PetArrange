@@ -1,5 +1,6 @@
 package com.example.petarrange.controller;
 
+import com.example.petarrange.entity.Admin;
 import com.example.petarrange.service.impl.AccountServiceImpl;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;

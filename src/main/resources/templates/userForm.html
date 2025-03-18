@@ -9,12 +9,12 @@
 
 <div id="functionBar">
     <section class="filter-section">
-        <input type="text" id="search" placeholder="输入用户名">
-        <button th:id="search">搜索</button>
+        <input type="text" id="search" placeholder="搜索">
 
         <button th:id="addBtn">新增</button>
         <button th:id="delBtn">删除</button>
     </section>
+
 
 
 </div>
@@ -25,14 +25,18 @@
                         <th></th>
                         <th>用户名</th>
                         <th>密码</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
                 </tr>
 
                 <div id="user1_form">
-                    <th:block th:each="user:${session.userList}">
+                    <th:block th:each="user,iterStat:${session.userList}">
                         <tr>
                             <td><input type="checkbox" class="select-row"></td>
-                            <td th:text="${user.username}">用户1</td>
-                            <td th:text="${user.password}">密码1</td>
+                            <td th:id="'name-'+${iterStat.index+1}" th:text="${user.username}">用户1</td>
+                            <td th:id="'password-'+${iterStat.index+1}" th:text="${user.password}">密码1</td>
                         </tr>
                     </th:block>
                 </div>

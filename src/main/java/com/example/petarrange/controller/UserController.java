@@ -10,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -46,24 +43,29 @@ public class UserController {
 
 
     //添加书籍，首先需要跳转到添加用户的表单页面
-    @RequestMapping("/toAddUser")
-    public String toAddUser(){
-
-        //接收到前端请求后，跳到添加用户表单页面
-        return "addUser";
-    }
+//    @RequestMapping("/toAddUser")
+//    public String toAddUser(@Param("username")String username,@Param("password") String password){
+//
+//
+//        //接收到前端请求后，跳到添加用户表单页面
+//        return "addUser";
+//    }
 
     //接收添加用户表单的数据，进行正式的添加用户，添加完成后，重定向到所有用户页面
-    @RequestMapping("addUser")
-    public String addUser(@ModelAttribute User user){
-
-        userService.addUser(user);
-        System.out.println(user.toString());
-        return "redirect:/user/allUser";
+    @RequestMapping("/addUser")
+    @ResponseBody
+    public int addUser(@Param("username")String username,@Param("password")String password){
+         return userService.addUser(username,password);
     }
 
+//    @PostMapping("/add")
+//    public void add(@Param("username")String username,@Param("password")String password){
+//        userService.addUser(username,password);
+//        return;
+//    }
+
     //更新用户
-    @RequestMapping("toUpdateUser")
+    @RequestMapping("/toUpdateUser")
     public String toUpdateUser(Model model,String username){
 
         User user = userService.findUserByName(username);
@@ -73,7 +75,7 @@ public class UserController {
     }
 
     //正式更新用户
-    @RequestMapping("updateUser")
+    @RequestMapping("/updateUser")
     public String updateUser(@ModelAttribute User user){
 
         System.out.println(user.toString());
@@ -84,11 +86,10 @@ public class UserController {
 
 
     //删除
-    @RequestMapping("delUser")
-    public String delUser(@ModelAttribute User user){
-
-        userService.delUser(user);
-        return "redirect:/user/allUser";
+    @RequestMapping("/delUser")
+    @ResponseBody
+    public int delUser(@Param("userList")List<User> userList){
+        return userService.delUser(userList);
     }
 
 
@@ -159,7 +160,7 @@ public class UserController {
 
     @GetMapping("/search")
     @ResponseBody
-    public List<User> searchUserLike(String username){
-        return userService.findUsersByUsernameLike(username);
+    public List<User> searchUserLike(@Param("value") String value){
+        return userService.findUsersByUsernameLike(value);
     }
 }

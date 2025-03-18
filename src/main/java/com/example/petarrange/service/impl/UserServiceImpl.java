@@ -15,15 +15,21 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
     @Override
-    public int addUser(User user) {
-
-        return userMapper.addUser(user.getUsername(),user.getPassword());
+    public int addUser(String username,String password) {
+        return userMapper.addUser(username,password);
     }
 
     @Override
-    public int delUser(User user) {
-        return userMapper.delUser(user.getUsername());
+    public int delUser(List<User> userList) {
+        int count=0;
+        for(User user:userList){
+            userMapper.delUser(user.getUsername());
+            count++;
+        }
+        return count;
     }
+
+
 
     @Override
     public List<User> selectAllUser() {
@@ -46,7 +52,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findUsersByUsernameLike(String username) {
-        System.out.println("1");
         return userMapper.findUsersByUsernameLike(username);
     }
 

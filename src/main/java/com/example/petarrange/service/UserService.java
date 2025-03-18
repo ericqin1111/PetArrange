@@ -7,11 +7,12 @@ import java.util.List;
 public interface UserService {
 
 
+
     //添加用户
-    public int addUser(User user);
+    public int addUser(String username,String password);
 
     //删除用户
-    public int delUser(User user);
+    public int delUser(List<User> userList);
 
     //更新用户信息
     public int updateUser(User user);

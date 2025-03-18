@@ -10,15 +10,21 @@ $(document).ready(function () {
 
     document.getElementById('search').addEventListener('input',function (event){
         var searchValue = this.value;  // 获取输入框的当前值
-        console.log(222);
         $.ajax({
             url:'/user/search',
             method: 'Get',
             data: {value:searchValue},
 
             success:function (response){
+
+
                 var userList=response;
-                console.log(333);
+                if(userList===''){
+                    var event = new Event('click');
+                    document.getElementById('pangination').dispatchEvent(event);
+                    jqxhr.abort();
+                }
+
 
                 var formContent = document.getElementById("user2_form");
                 // formContent.innerHTML="";

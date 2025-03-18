@@ -1,5 +1,6 @@
 package com.example.petarrange.controller;
 
+import com.example.petarrange.entity.Admin;
 import com.example.petarrange.service.impl.AccountServiceImpl;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ public class AccountController {
     AccountServiceImpl accountService;
     @GetMapping("loginForm") //前端页面通过/account/loginForm访问,进入登入页面
     public String loginForm(Model model){
-        Admin admin=new Admin();
+       Admin admin=new Admin();
         model.addAttribute("admin",admin);// 给前端一个admin对象，如果前端的提交的数据和admin对象中的数据名相同，就会直接匹配
         return "/account/login";//进入登入页面
     }

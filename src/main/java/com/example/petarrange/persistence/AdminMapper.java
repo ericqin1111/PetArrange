@@ -2,6 +2,7 @@ package com.example.petarrange.persistence;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.petarrange.annotation.EncryptMethod;
+import com.example.petarrange.entity.Admin;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

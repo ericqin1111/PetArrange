@@ -10,15 +10,22 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Data
+
 @TableName("signon")
 @AllArgsConstructor//有参构造
 @NoArgsConstructor//无参构造
+
+
+
 public class User {
 
     @TableId("username")
     private String username;
     @EncryptField
     private String password;
+
+
+
 
 
 

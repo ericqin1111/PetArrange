@@ -1,38 +1,109 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>管理系统</title>
-    <link rel="stylesheet" type="text/css" href="home/styles.css">
+    <title>后台管理</title>
+    <!-- 引入CSS -->
+    <link rel="stylesheet" th:href="@{/css/font.css}">
+    <link rel="stylesheet" th:href="@{/css/xadmin.css}">
+    <link rel="stylesheet" th:href="@{/lib/layui/css/layui.css}">
 </head>
 <body>
-
-<div class="wrapper">
-    <div class="leftbox">
-        <ul>
-            <li style="height: 200px;">
-                <p style="margin: 0; padding: 0; display: flex; align-items: center; justify-content: center; height: 100%;">
-                    <img src="/img/logo.jpg" alt="Logo" style="max-width: 100%; max-height: 100%; object-fit: contain;">
-                </p>
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">PetStore</div>
+        <!--        <ul class="layui-nav layui-layout-left">-->
+        <!--            <li class="layui-nav-item"><a href="javascript:;" onclick="loadContent('fish')">Fish</a></li>-->
+        <!--            <li class="layui-nav-item"><a href="javascript:;" onclick="loadContent('dogs')">Dogs</a></li>-->
+        <!--            <li class="layui-nav-item"><a href="javascript:;" onclick="loadContent('reptiles')">Reptiles</a></li>-->
+        <!--            <li class="layui-nav-item"><a href="javascript:;" onclick="loadContent('cats')">Cats</a></li>-->
+        <!--            <li class="layui-nav-item"><a href="javascript:;" onclick="loadContent('birds')">Birds</a></li>-->
+        <!--           -->
+        <!--        </ul>-->
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+                    测试
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">测试1</a></dd>
+                    <dd><a href="">测试2</a></dd>
+                </dl>
             </li>
-            <li>
-                <p><a href="">首页</a></p>
-            </li>
-            <li>
-                <p><a href="">商品管理</a></p>
-            </li>
-            <li>
-                <p><a href="">用户管理</a></p>
-            </li>
-            <li>
-                <p><a href="">订单管理</a></p>
-            </li>
+            <li class="layui-nav-item"><a href="">退出登陆</a></li>
         </ul>
     </div>
-    <div class="rightbox">
-        <div class="welcome-message">欢迎来到管理系统！</div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <!--                <li class="layui-nav-item layui-nav-itemed">-->
+                <!--                    <a class="" href="javascript:;">所有</a>-->
+                <!--                    <dl class="layui-nav-child">-->
+                <!--                        <dd><a href="javascript:;" onclick="loadContent('fish')">Fish</a></dd>-->
+                <!--                        <dd><a href="javascript:;" onclick="loadContent('dogs')">Dogs</a></dd>-->
+                <!--                        <dd><a href="javascript:;" onclick="loadContent('cats')">Cats</a></dd>-->
+                <!--                        <dd><a href="javascript:;" onclick="loadContent('reptiles')">Reptiles</a></dd>-->
+                <!--                        <dd><a href="javascript:;" onclick="loadContent('birds')">Birds</a></dd>-->
+                <!--                    </dl>-->
+                <!--                </li>-->
+
+                <li class="layui-nav-item">
+                    <a href="javascript:;" onclick="loadContent('index')">首页</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;" onclick="loadContent('userManagement')">用户管理</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;" onclick="loadContent('productManagement')">商品管理</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;" onclick="loadContent('orderManagement')">订单管理</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    <div class="layui-body">
+        <!-- 这里会动态加载内容 -->
+        <div id="content"></div>
+    </div>
+
+    <div class="layui-footer">
+
     </div>
 </div>
 
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/js/xadmin.js}"></script>
+
+
+<script>
+    layui.use(['element', 'layer'], function () {
+        var element = layui.element;
+        var layer = layui.layer;
+
+        // 加载内容函数
+        window.loadContent = function (pageUrl) {
+            $.ajax({
+                url: pageUrl,  // 根据页面URL构建请求
+                method: 'GET',
+                success: function (response) {
+                    $('#content').html(response);  // 将响应内容插入到指定的div中
+                },
+                error: function (xhr, status, error) {
+                    $('#content').html('<p>加载失败，请稍后再试。</p>');  // 错误处理
+                }
+            });
+        }
+
+        // 默认加载第一个页面
+        $(document).ready(function () {
+            loadContent('/home/index');
+        });
+    });
+</script>
 </body>
 </html>

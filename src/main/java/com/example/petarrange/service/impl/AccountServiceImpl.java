@@ -1,6 +1,5 @@
 package com.example.petarrange.service.impl;
 
-import com.example.petarrange.entity.Admin;
 import com.example.petarrange.persistence.AdminMapper;
 import com.example.petarrange.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;

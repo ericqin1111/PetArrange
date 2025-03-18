@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" type="text/css" href="/styles.css">
+<head>
+    <meta charset="UTF-8">
+    <title>新增商品</title>
+</head>
+<body>
+<div class="welcome-message">${data.category}新增商品</div>
+<div class="wrapper">
+    <div class="leftbox">
+        <ul>
+            <li style="height: 200px;">
+                <p style="margin: 0; padding: 0; display: flex; align-items: center; justify-content: center; height: 100%;">
+                    <img src="/img/logo.jpg" alt="Logo" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                </p>
+            </li>
+            <li>
+                <p><a href="/index.html">首页</a></p>
+            </li>
+            <li>
+                <p><a href="/Commodity/Category">商品管理</a></p>
+            </li>
+            <li>
+                <p><a href="">用户管理</a></p>
+            </li>
+            <li>
+                <p><a href="">订单管理</a></p>
+            </li>
+        </ul>
+    </div>
+<div>
+    <div class="body-content" style="display: flex">
+        <form action="${ctx}/item/exAdd" method="post" class="form-x" enctype="multipart/form-data">
+            <div class="form-group">
+                <div class="label"><label>商品名称：</label></div>
+                <div class="field">
+                    <input type="text" class="input w50" name="name" data-validate="required:请输入商品名称" />
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label"><label>商品价格：</label></div>
+                <div class="field">
+                    <input type="text" class="input w50" name="price" data-validate="required:请输入商品价格" />
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label"><label>商品折扣：</label></div>
+                <div class="field">
+                    <input type="text" class="input w50" name="zk" data-validate="required:请输入商品折扣" />
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label"><label>商品类别：${data.category}</label></div>
+            </div>
+            <div class="form-group">
+                <div class="label"><label>图片：</label></div>
+                <div class="field">
+                    <input type="file" class="input w50" name="file" />
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label"></div>
+                <div class="field">
+                    <button class="button bg-main icon-check-square-o" type="submit" formaction="/Commodity/Commodity"
+                            formmethod="post">提交</button>
+                    <button class="button bg-main icon-check-square-o" type="reset">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

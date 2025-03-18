@@ -152,7 +152,7 @@ public interface BaseService<T> {
      * @param sql
      * @return
      */
-    public Pager<T> findBySqlRerturnEntity(@Param("sql")String sql);
+    public Pager<T> findBySqlReturnEntity(@Param("sql")String sql);
     
     /**
      * 通过sql修改

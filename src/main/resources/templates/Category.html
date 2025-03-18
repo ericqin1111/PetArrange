@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" type="text/css" href="/styles.css">
+<head>
+  <meta charset="UTF-8">
+  <title>商品类型管理</title>
+</head>
+<body>
+<div>
+  <div class="welcome-message">商品类型管理</div>
+</div>
+<div class="wrapper">
+  <div class="leftbox">
+    <ul>
+      <li style="height: 200px;">
+        <p style="margin: 0; padding: 0; display: flex; align-items: center; justify-content: center; height: 100%;">
+          <img src="/img/logo.jpg" alt="Logo" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+        </p>
+      </li>
+      <li>
+        <p><a href="/index.html">首页</a></p>
+      </li>
+      <li>
+        <p><a href="/Commodity/Category">商品管理</a></p>
+      </li>
+      <li>
+        <p><a href="">用户管理</a></p>
+      </li>
+      <li>
+        <p><a href="">订单管理</a></p>
+      </li>
+    </ul>
+  </div>
+  <div class="wrapper">
+    <form action="${ctx}/Commodity/findBySql" id="" method="post">
+      <div>
+        <ul style="padding-left: 10px;">
+          <li>
+            <input type="text" placeholder="请输入商品类型" name="name" class="input" value="${obj.name}"
+                   style="width: 250px;line-height: 17px;display: inline-block" />
+            <a href="javascript:void(0)" onclick="changeSearch()" class="button border-main icon-search">搜索</a>
+            <a href="/Commodity/Add">添加商品类型</a>
+          </li>
+        </ul>
+      </div>
+    </form>
+    <table class="action-bar">
+      <tr>
+        <th>商品类型</th>
+        <th>商品主图</th>
+        <th>操作</th>
+      </tr>
+      <forEach items="${pager.data}" var="data" varStatus="l">
+        <tr>
+          <td>${data.name}</td>
+          <td><img src="${data.url1}" alt="" style="width: 100px;height: 100px;"></td>
+          <td>
+            <a class="" href="/Commodity/Commodity"><span class="">查询</span> </a>
+            <a class="" href="${ctx}/Commodity/update?id=${data.id}"><span class="">修改</span> </a>
+            <a class="" href="${ctx}/Commodity/delete?id=${data.id}"><span class="">删除</span> </a>
+          </td>
+        </tr>
+      </forEach>
+      <tr>
+        <td colspan="8">
+          <div class="action-bar">
+            <!--分页开始-->
+            <pager url="${ctx}/Commodity/findBySql" maxIndexPages="5" items="${pagers.total}" maxPageItems="15" export="curPage=pageNumber">
+              <last style="align-self: center">
+                共${pagers.total}记录，共${pageNumber}页，当前第${curPage}页
+              </last>
+              <div class="action-bar">
+                <first>
+                  <a href="${pageUrl}">首页</a>
+                </first>
+                <prev>
+                  <a href="${pageUrl}">上一页</a>
+                </prev>
+                <pages>
+                  <choose>
+                    <when test="${curPage eq pageNumber}">
+                      <font color="red">[${pageNumber}]</font>
+                    </when>
+                    <otherwise>
+                      <a href="${pageUrl}">${pageNumber}</a>
+                    </otherwise>
+                  </choose>
+                </pages>
+                <next>
+                  <a href="${pageUrl}">下一页</a>
+                </next>
+                <last>
+                  <choose>
+                    <when test="${curPage eq pageNumber}">
+                      <font color="red">尾页</font>
+                    </when>
+                    <otherwise>
+                      <a href="${pageUrl}">尾页</a>
+                    </otherwise>
+                  </choose>
+                </last>
+              </div>
+            </pager>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+</body>
+</html>

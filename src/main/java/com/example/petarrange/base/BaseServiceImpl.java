@@ -233,7 +233,7 @@ public abstract  class BaseServiceImpl<T> implements BaseService<T>{
      * @param sql
      * @return
      */
-	public Pager<T> findBySqlRerturnEntity(String sql) {
+	public Pager<T> findBySqlReturnEntity(String sql) {
 		/**
 		 * 执行分页
 		 */

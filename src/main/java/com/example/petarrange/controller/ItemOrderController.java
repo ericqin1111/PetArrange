@@ -103,7 +103,7 @@ public class ItemOrderController  {
             model.addAttribute("success", null);
         }
         model.addAttribute("itemOrder", itemOrder);
-        return "/order/itemOrderDetail";
+        return "/order/itemOrderDetail0";
     }
 
     @PostMapping("/update")

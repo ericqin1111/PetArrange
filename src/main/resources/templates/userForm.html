@@ -2,94 +2,145 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>用户管理系统</title>
+    <!-- Layui核心文件 -->
+    <link rel="stylesheet" href="/lib/layui/css/layui.css">
+    <script src="/lib/layui/layui.js"></script>
     <script src="/js/jquery.js"></script>
 </head>
-<body>
+<body class="layui-layout-body">
+<div class="layui-container">
+    <!-- 功能栏（栅格布局） -->
+    <div class="layui-row layui-col-space10" style="margin:15px 0">
+        <div class="layui-col-md3">
+            <input type="text" class="layui-input" id="search" placeholder="请输入关键词">
+        </div>
+        <div class="layui-col-md9">
+            <button class="layui-btn layui-btn-normal" id="addBtn">
+                <i class="layui-icon">&#xe608;</i> 新增
+            </button>
+            <button class="layui-btn layui-btn-danger" id="delBtn">
+                <i class="layui-icon">&#xe640;</i> 删除
+            </button>
+        </div>
+    </div>
 
-<div id="functionBar">
-    <section class="filter-section">
-        <input type="text" id="search" placeholder="搜索">
+    <!-- 表格容器 -->
+    <table id="userTable" class="layui-table" lay-filter="userTable">
+        <thead>
+        <tr>
+            <th lay-data="{type:'checkbox'}"></th>
+            <th lay-data="{field:'username', width:200}">用户名</th>
+            <th lay-data="{field:'password', width:200}">密码</th>
+            <th lay-data="{field:'operation', width:150, toolbar:'#barDemo'}">操作</th>
+        </tr>
+        </thead>
+<!--        <tbody>-->
+<!--        <th:block th:each="user,iterStat:${session.userList}">-->
+<!--            <tr>-->
+<!--                <td></td>-->
+<!--                <td th:text="${user.username}"></td>-->
+<!--                <td th:text="${user.password}"></td>-->
+<!--                <td></td>-->
+<!--            </tr>-->
+<!--        </th:block>-->
+<!--        </tbody>-->
+        <tbody><!-- 留空，由Layui填充 --></tbody>
+    </table>
 
-        <button th:id="addBtn">新增</button>
-        <button th:id="delBtn">删除</button>
-    </section>
-
-
-
+    <!-- 分页容器 -->
+    <div id="pageDemo" class="layui-box layui-laypage"></div>
 </div>
 
+<!-- 操作列模板 -->
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
+</script>
 
-            <table id="user2_form">
-                <tr>
-                        <th></th>
-                        <th>用户名</th>
-                        <th>密码</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                </tr>
+<script>
+    layui.use(['table', 'laypage'], function () {
+        const table = layui.table;
+        const laypage = layui.laypage;
 
-                <div id="user1_form">
-                    <th:block th:each="user,iterStat:${session.userList}">
-                        <tr>
-                            <td><input type="checkbox" class="select-row"></td>
-                            <td th:id="'name-'+${iterStat.index+1}" th:text="${user.username}">用户1</td>
-                            <td th:id="'password-'+${iterStat.index+1}" th:text="${user.password}">密码1</td>
-                        </tr>
-                    </th:block>
-                </div>
-
-            </table>
-
-            <div class="pangination" id="pangination">
-                <tr>
-                    <th:block th:if="${session.totalPages<=5}">
-                        <button th:each="i:${#numbers.sequence(1,session.totalPages)}"
-                                th:text="${i}"
-                                th:id="'pageBtn'+${i}"
-                                th:data-page="${i}"></button>
-                    </th:block>
+        // 表格渲染（网页6的模块化规范）
+        table.init('userTable', {
+            url: '/user/updateUser', // 数据接口
+            page: true,              // 启用分页
+            limits: [10, 20, 30],    // 每页条数选择
+            height: 420,
+            response: {              // 配置响应字段映射
+                statusName: 'code',
+                countName: 'count',
+                dataName: 'data'
+            }
+        });
 
 
-                    <th:block th:if="${session.totalPages>5 && session.page<=5}">
+        // // 分页渲染（网页3的分页实践）
+        // laypage.render({
+        //     elem: 'pageDemo',
+        //     count: [[${session.totalRecord}]],
+        //     limit: [[${session.pageSize}]],
+        //     curr: [[${session.page}]],
+        //     theme: '#1E9FFF',
+        //     jump: function(obj, first) {
+        //         if (!first) {
+        //             // 通过表格组件的 reload 方法刷新数据
+        //             table.reload('userTable', {
+        //                 where: { page: obj.curr }, // 传递页码参数
+        //                 page: obj.curr // 更新当前页码
+        //             });
+        //         }
+        //     }
+        // });
+        function loadUsers(page) {
+            $.ajax({
+                url: '/user/updateUser',
+                method: 'GET',
+                data: {
+                    page: page
+                },
+                success: function (response) {
+                    if( response.data){
+                        // 使用 table.reload 方法重新加载表格数据
+                        layui.table.reload('userTable', {
+                            data: response.data, // 假设返回的数据结构如你所述
+                            page: {
+                                curr: page // 当前页码
+                            }
+                        });
 
-                        <button th:each="i:${#numbers.sequence(1,5)}"
-                                th:text="${i}"
-                                th:id="'pageBtn'+${i}"
-                                th:data-page="${i}"></button>
-                        <span>……</span>
-                        <button th:text="${session.totalPages}"
-                                th:id="${session.totalPages}"
-                                th:data-page="${session.totalPages}"></button>
-                    </th:block>
+                    } else {
+                        console.error('Error: Response code is not 0 or data is missing.');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error fetching user list:', error);
+                }
+            });
+        }
 
-                    <th:block th:if="${session.totalPages>5 && session.page>5 && session.page+2<=session.totalPages }">
-                        <button th:data-page="1" th:text="1" th:id="pageBtn1"></button>
-                        <span>……</span>
-                        <button th:each="i:${#numbers.sequence(${session.page}-2,${session.page}+2)}"
-                                th:text="${i}"
-                                th:id="'pageBtn'+${i}"
-                                th:data-page="${i}"></button>
-                        <button th:if="${session.page}"
-                                th:text="session.totalPages"
-                                th:id="${session.totalPages}"
-                                th:data-page="${session.totalPages}"></button>
-                    </th:block>
+        // 表格事件监听（网页4的交互实践）
+        table.on('tool(userTable)', function (obj) {
+            const data = obj.data;
+            if (obj.event === 'del') {
+                layer.confirm('确认删除该用户？', function (index) {
+                    obj.del();
+                    layer.close(index);
+                });
+            } else if (obj.event === 'edit') {
+                layer.prompt({
+                    title: '修改密码',
+                    value: data.password
+                }, function (value, index) {
+                    obj.update({password: value});
+                    layer.close(index);
+                });
+            }
+        });
+    });
+</script>
 
-                    <th:block th:if="${session.page>5 && session.page+2>session.totalPages && session.totalPages>5}">
-                        <button th:data-page="1" th:text="1" th:id="pageBtn1"></button>
-                        <span>……</span>
-                        <button th:each="i:${#numbers.sequence(${session.page}-2,${session.totalPages})}"
-                                th:text="${i}"
-                                th:id="pageBtn+${i}"
-                                th:data-page="${i}"></button>
-                    </th:block>
-                </tr>
-            </div>
-
-
-<script src="/js/page.js"></script>
 </body>
 </html>

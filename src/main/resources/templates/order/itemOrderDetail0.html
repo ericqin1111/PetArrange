@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org">
+    <title>订单详情</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+</head>
+<body>
+<div class="wrapper">
+    <div class="leftbox">
+        <ul>
+            <li style="height: 200px;">
+                <p style="margin: 0; padding: 0; display: flex; align-items: center; justify-content: center; height: 100%;">
+                    <img src="/img/logo.jpg" alt="Logo" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                </p>
+            </li>
+            <li>
+                <p><a href="/static">首页</a></p>
+            </li>
+            <li>
+                <p><a href="/itemOrder/orderForm">订单管理</a></p>
+            </li>
+        </ul>
+    </div>
+    <div class="rightbox">
+        <div class="welcome-message">订单详情</div>
+        <form action="/itemOrder/update" method="post">
+            <input type="hidden" name="id" th:value="${itemOrder.id}">
+            <input type="text" name="code" th:value="${itemOrder.code}" placeholder="订单编号">
+            <input type="text" name="userId" th:value="${itemOrder.userName}" placeholder="用户ID">
+            <input type="text" name="itemId" th:value="${itemOrder.itemId}" placeholder="商品ID">
+            <input type="text" name="addTime" th:value="${itemOrder.addTime}" placeholder="下单时间">
+            <input type="text" name="total" th:value="${itemOrder.total}" placeholder="购买数量">
+            <input type="text" name="status" th:value="${itemOrder.status}" placeholder="状态">
+            <button type="submit">更新订单</button>
+        </form>
+        <form action="/itemOrder/delete" method="post">
+            <input type="hidden" name="id" th:value="${itemOrder.id}">
+            <button type="submit">删除订单</button>
+        </form>
+        <form action="/itemOrder/ship" method="post">
+            <input type="hidden" name="id" th:value="${itemOrder.id}">
+            <button type="submit">发货</button>
+        </form>
+        <div th:if="${success != null}">
+            <p th:text="${success}"></p>
+        </div>
+        <div th:if="${error}">
+            <p th:text="${error}"></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+
+

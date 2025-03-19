@@ -3,7 +3,6 @@ package com.example.petarrange.controller;
 import com.example.petarrange.entity.ItemOrder;
 import com.example.petarrange.entity.ItemOrderArray;
 import com.example.petarrange.service.ItemOrderService;
-import com.example.petarrange.utils.Pager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import static io.micrometer.common.util.StringUtils.isEmpty;
-
 @Controller
 @RequestMapping("/itemOrder")
 public class ItemOrderController  {
@@ -30,6 +23,14 @@ public class ItemOrderController  {
     private ItemOrderService itemOrderService;
 
 
+    @RequestMapping("/orderForm0")
+    public String orderForm0(Model model) {
+        ItemOrderArray itemOrderArray = itemOrderService.getAllOrders();
+        System.out.println(itemOrderArray);
+        model.addAttribute("orderArray", itemOrderArray);
+
+        return "/order/itemOrder0";
+    }
 
     @GetMapping("/orderForm")
     public String orderForm(Model model) {
@@ -37,7 +38,7 @@ public class ItemOrderController  {
         System.out.println(itemOrderArray);
         model.addAttribute("orderArray", itemOrderArray);
 
-        return "itemOrder";
+        return "/order/itemOrder";
     }
 
 
@@ -47,13 +48,13 @@ public class ItemOrderController  {
             System.out.println("2222");
             ItemOrderArray itemOrderArray = itemOrderService.getOrderByCode(code);
             model.addAttribute("orderArray", itemOrderArray);
-            return "itemOrder";
+            return "/order/itemOrder";
         }
         else {
             System.out.println("111");
             ItemOrderArray itemOrderArray = new ItemOrderArray();
             model.addAttribute("orderArray", itemOrderArray);
-            return "itemOrder";
+            return "/order/itemOrder";
         }
 //        // 分页查询
 //        String sql = "select * from item_order";
@@ -102,7 +103,7 @@ public class ItemOrderController  {
             model.addAttribute("success", null);
         }
         model.addAttribute("itemOrder", itemOrder);
-        return "itemOrderDetail";
+        return "/order/itemOrderDetail";
     }
 
     @PostMapping("/update")

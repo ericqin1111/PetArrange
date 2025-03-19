@@ -74,6 +74,8 @@ public class DatabaseCreator implements CommandLineRunner {
                         "    check (`status` in (0, 1, 2, 3, 4))" +
                         ")");
 
+        jdbcTemplate.execute("ALTER TABLE signon MODIFY password VARCHAR(512);");
+
 
     }
 }

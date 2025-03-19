@@ -8,6 +8,7 @@ import lombok.Getter;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -55,7 +56,14 @@ public class UserController {
     @RequestMapping("/addUser")
     @ResponseBody
     public int addUser(@Param("username")String username,@Param("password")String password){
-         return userService.addUser(username,password);
+        User user=new User();
+        user=userService.findUserByName(username);
+        if(user==null){
+            return userService.addUser(username,password);
+        }
+        else{
+            return userService.updateUser(user);
+        }
     }
 
 //    @PostMapping("/add")
@@ -86,12 +94,21 @@ public class UserController {
 
 
     //删除
-    @RequestMapping("/delUser")
+    @PostMapping("/delUser")
     @ResponseBody
-    public int delUser(@Param("userList")List<User> userList){
-        return userService.delUser(userList);
-    }
+//    public int delUser(@RequestBody ArrayList<String> userList){
+//        return userService.delUser(userList);
+//    }
 
+    public ResponseEntity<String> delUser(@RequestBody Map<String, List<String>> requestBody) {
+        List<String> userList = requestBody.get("userList");
+        userService.delUser(userList);
+        if (userList == null || userList.isEmpty()) {
+            return ResponseEntity.badRequest().body("用户列表为空");
+        }
+
+        return ResponseEntity.ok("删除成功");
+    }
 
     //查询用户 根据用户名查询
     @RequestMapping("/queryUser")
@@ -139,10 +156,9 @@ public class UserController {
         int offset=(page-1)*pageSize;
         int totalRecord=0;
         int totalPages=0;
-        List<User> userList = new ArrayList<>();
+        List<User> userList;
 
         userList=userService.selectPageUser(pageSize,offset);
-
         totalRecord=userService.count();
         totalPages=(int)Math.ceil(totalRecord/(double)pageSize);
 
@@ -160,7 +176,15 @@ public class UserController {
 
     @GetMapping("/search")
     @ResponseBody
-    public List<User> searchUserLike(@Param("value") String value){
-        return userService.findUsersByUsernameLike(value);
+    public List<User> searchUserLike(@Param("value") String value,HttpSession session){
+
+        List<User> userList=userService.findUsersByUsernameLike(value);
+//        int page=1;
+//        int pageSize=5;
+////        System.out.println("page"+page);
+//        int offset=(page-1)*pageSize;
+//        int totalRecord=0;
+//        int totalPages=0;
+        return userList;
     }
 }

@@ -20,10 +20,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int delUser(List<User> userList) {
+    public int delUser(List<String> userList) {
         int count=0;
-        for(User user:userList){
-            userMapper.delUser(user.getUsername());
+        for(String username:userList){
+            userMapper.delUser(username);
             count++;
         }
         return count;

@@ -12,7 +12,7 @@
         <input type="text" id="search" placeholder="搜索">
 
         <button th:id="addBtn">新增</button>
-        <button th:id="delBtn">删除</button>
+        <button th:id="delBtn" th:class="del_btn">删除</button>
     </section>
 
 
@@ -28,7 +28,7 @@
                         <th></th>
                         <th></th>
                         <th></th>
-                        <th></th>
+<!--                        <th></th>-->
                 </tr>
 
                 <div id="user1_form">
@@ -37,6 +37,8 @@
                             <td><input type="checkbox" class="select-row"></td>
                             <td th:id="'name-'+${iterStat.index+1}" th:text="${user.username}">用户1</td>
                             <td th:id="'password-'+${iterStat.index+1}" th:text="${user.password}">密码1</td>
+                            <td><button th:id="'ModBtn-'+${iterStat.index+1}" th:class="modify_btn" th:text="修改" ></button></td>
+                            <td><button th:id="'DelBtn-'+${iterStat.index+1}" th:class="save_btn" th:text="保存"></button></td>
                         </tr>
                     </th:block>
                 </div>

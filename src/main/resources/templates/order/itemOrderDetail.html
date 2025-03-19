@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>后台管理</title>
@@ -50,13 +50,13 @@
                 <!--                </li>-->
 
                 <li class="layui-nav-item">
-                    <a href="javascript:;" onclick="loadContent('index')">首页</a>
+                    <a href="javascript:;" onclick="loadContent('/home/index')">首页</a>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="javascript:;" onclick="loadContent('userManagement')">用户管理</a>
+                    <a href="javascript:;" onclick="loadContent('/home/userManagement')">用户管理</a>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="javascript:;" onclick="loadContent('productManagement')">商品管理</a>
+                    <a href="javascript:;" onclick="loadContent('/home/productManagement')">商品管理</a>
                 </li>
                 <li class="layui-nav-item">
                     <a href="javascript:;" onclick="loadContent('/itemOrder/orderForm0')">订单管理</a>
@@ -67,7 +67,9 @@
     </div>
     <div class="layui-body">
         <!-- 这里会动态加载内容 -->
-        <div id="content"></div>
+        <div id="content">
+            <div th:replace="~{/order/itemOrderDetail0}"></div>
+        </div>
     </div>
 
     <div class="layui-footer">
@@ -99,10 +101,6 @@
             });
         }
 
-        // 默认加载第一个页面
-        $(document).ready(function () {
-            loadContent('/home/index');
-        });
     });
 </script>
 </body>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/js/jquery.js"></script>
+</head>
+<body>
+
+
+<div class="leftbox">
+    <ul>
+        <li style="height: 200px;">
+            <p style="margin: 0; padding: 0; display: flex; align-items: center; justify-content: center; height: 100%;">
+                <img src="/img/logo.jpg" alt="Logo" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+            </p>
+        </li>
+<!--        <li>-->
+<!--            <p><a th:href="@{/static}">首页</a></p>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--            <p><a href="/itemOrder/orderForm">订单管理</a></p>-->
+<!--        </li>-->
+    </ul>
+
+    <div id="functionBar">
+        <section class="filter-section">
+            <input type="text" id="search" placeholder="搜索">
+
+            <button th:id="addBtn">新增</button>
+            <button th:id="delBtn" th:class="del_btn">删除</button>
+        </section>
+
+    </div>
+</div>
+
+            <table id="user2_form">
+                <tr>
+                        <th></th>
+                        <th>用户名</th>
+                        <th>密码</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+<!--                        <th></th>-->
+                </tr>
+
+                <div id="user1_form">
+                    <th:block th:each="user,iterStat:${session.userList}">
+                        <tr>
+                            <td><input type="checkbox" class="select-row"></td>
+                            <td th:id="'name-'+${iterStat.index+1}" th:text="${user.username}">用户1</td>
+                            <td th:id="'password-'+${iterStat.index+1}" th:text="${user.password}">密码1</td>
+                            <td><button th:id="'ModBtn-'+${iterStat.index+1}" th:class="modify_btn" th:text="修改" ></button></td>
+                            <td><button th:id="'DelBtn-'+${iterStat.index+1}" th:class="save_btn" th:text="保存"></button></td>
+                        </tr>
+                    </th:block>
+                </div>
+
+            </table>
+
+            <div class="pangination" id="pangination">
+                <tr>
+                    <th:block th:if="${session.totalPages<=5}">
+                        <button th:each="i:${#numbers.sequence(1,session.totalPages)}"
+                                th:text="${i}"
+                                th:id="'pageBtn'+${i}"
+                                th:data-page="${i}"></button>
+                    </th:block>
+
+
+                    <th:block th:if="${session.totalPages>5 && session.page<=5}">
+
+                        <button th:each="i:${#numbers.sequence(1,5)}"
+                                th:text="${i}"
+                                th:id="'pageBtn'+${i}"
+                                th:data-page="${i}"></button>
+                        <span>……</span>
+                        <button th:text="${session.totalPages}"
+                                th:id="${session.totalPages}"
+                                th:data-page="${session.totalPages}"></button>
+                    </th:block>
+
+                    <th:block th:if="${session.totalPages>5 && session.page>5 && session.page+2<=session.totalPages }">
+                        <button th:data-page="1" th:text="1" th:id="pageBtn1"></button>
+                        <span>……</span>
+                        <button th:each="i:${#numbers.sequence(${session.page}-2,${session.page}+2)}"
+                                th:text="${i}"
+                                th:id="'pageBtn'+${i}"
+                                th:data-page="${i}"></button>
+                        <button th:if="${session.page}"
+                                th:text="session.totalPages"
+                                th:id="${session.totalPages}"
+                                th:data-page="${session.totalPages}"></button>
+                    </th:block>
+
+                    <th:block th:if="${session.page>5 && session.page+2>session.totalPages && session.totalPages>5}">
+                        <button th:data-page="1" th:text="1" th:id="pageBtn1"></button>
+                        <span>……</span>
+                        <button th:each="i:${#numbers.sequence(${session.page}-2,${session.totalPages})}"
+                                th:text="${i}"
+                                th:id="pageBtn+${i}"
+                                th:data-page="${i}"></button>
+                    </th:block>
+                </tr>
+            </div>
+
+
+<script src="/js/page.js"></script>
+</body>
+</html>

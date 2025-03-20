@@ -1,0 +1,113 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* 新增盒模型 */
+}
+
+html, body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden; /* 防止滚动条出现 */
+}
+
+.wrapper {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    display:flex;
+    /* 使用flex布局 */
+}
+
+.rightbox {
+    flex: 1; /* 占据剩余空间 */
+    height: 100%;
+    background-color: slateblue;
+    position: relative;
+}
+
+.leftbox {
+    width: 600px;
+    height: 100%;
+    position: relative;
+}
+
+.leftbox ul {
+    list-style: none;
+}
+
+.leftbox ul li {
+    height: 60px;
+    line-height: 60px;
+    list-style-type: none;
+    margin: 5px;
+    position: relative; /* 为子元素定位做准备 */
+}
+
+.leftbox a {
+    text-decoration: none; /* 移除默认的下划线 */
+    color: #323232;
+}
+
+.leftbox a:hover {
+    text-decoration: none; /* 确保悬停时也没有下划线 */
+}
+
+.leftbox p {
+    text-decoration: none; /* 确保 p 标签没有下划线 */
+}
+
+.leftbox li p {
+    width: 180px;
+    height: 30px;
+    padding-left: 20px;
+    border: 1px solid transparent; /* 默认透明边框 */
+}
+
+.leftbox li:hover {
+    border: solid 1px blue; /* li 的边框 */
+    border-right: 1px solid transparent; /* 右边框透明 */
+    margin-left: -1px; /* 向左移动1px，使边框重合 */
+}
+
+.submenu {
+    width: calc(100vw - 200px - 2px); /* 计算剩余宽度 */
+    height: calc(100vh - 2px);
+    background-color: #eee;
+    border: solid 1px blue;
+    position: fixed; /* 改为fixed定位 */
+    top: 0;
+    left: 200px;
+    z-index: 1;
+    display: none;
+    margin-left: -1px; /* 向左移动1px，使边框重合 */
+}
+
+.leftbox li:hover div.submenu {
+    display: block;
+}
+.Commodity{
+    display: flex;
+}
+/* 操作栏样式 */
+.action-bar {
+    display: flex;
+    gap: 12px;
+    margin: 20px 0;
+    padding: 16px;
+    background: white;
+    border-radius: var(--table-border-color);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+}
+/* 新增：欢迎字样样式 */
+.welcome-message {
+    width: 100%; /* 宽度占满父容器 */
+    height: 50px; /* 设置高度 */
+    background-color: yellow; /* 背景颜色为黄色 */
+    color: red; /* 字体颜色为红色 */
+    font-size: 20px; /* 字体大小 */
+    font-weight: bold; /* 字体加粗 */
+    display: flex; /* 使用 Flexbox 布局 */
+    align-items: center; /* 垂直居中 */
+    justify-content: center; /* 水平居中 */
+    border-bottom: 1px solid #ccc; /* 添加底部边框 */
+}

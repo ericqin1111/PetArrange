@@ -176,15 +176,30 @@ public class UserController {
 
     @GetMapping("/search")
     @ResponseBody
-    public List<User> searchUserLike(@Param("value") String value,HttpSession session){
+    public Map<String,Object> searchUserLike(@Param("value") String value,HttpSession session){
+
+
+        Map<String,Object> map=new HashMap<>();
+
+        Object pageStr=session.getAttribute("page");
+        int page = 1;
+        int pageSize=5;
+        int offset=0;
+        int totalRecord=0;
+        int totalPages=0;
 
         List<User> userList=userService.findUsersByUsernameLike(value);
-//        int page=1;
-//        int pageSize=5;
-////        System.out.println("page"+page);
-//        int offset=(page-1)*pageSize;
-//        int totalRecord=0;
-//        int totalPages=0;
-        return userList;
+        totalRecord=userList.size();
+        totalPages=(int)Math.ceil(totalRecord/(double)pageSize);
+
+
+        map.put("userList",userList);
+        map.put("totalPages",totalPages);
+        map.put("page",page);
+        map.put("offset",offset);
+
+
+
+        return map;
     }
 }

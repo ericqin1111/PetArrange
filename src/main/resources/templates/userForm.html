@@ -7,18 +7,32 @@
 </head>
 <body>
 
-<div id="functionBar">
-    <section class="filter-section">
-        <input type="text" id="search" placeholder="搜索">
 
-        <button th:id="addBtn">新增</button>
-        <button th:id="delBtn" th:class="del_btn">删除</button>
-    </section>
+<div class="leftbox">
+    <ul>
+        <li style="height: 200px;">
+            <p style="margin: 0; padding: 0; display: flex; align-items: center; justify-content: center; height: 100%;">
+                <img src="/img/logo.jpg" alt="Logo" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+            </p>
+        </li>
+<!--        <li>-->
+<!--            <p><a th:href="@{/static}">首页</a></p>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--            <p><a href="/itemOrder/orderForm">订单管理</a></p>-->
+<!--        </li>-->
+    </ul>
 
+    <div id="functionBar">
+        <section class="filter-section">
+            <input type="text" id="search" placeholder="搜索">
 
+            <button th:id="addBtn">新增</button>
+            <button th:id="delBtn" th:class="del_btn">删除</button>
+        </section>
 
+    </div>
 </div>
-
 
             <table id="user2_form">
                 <tr>

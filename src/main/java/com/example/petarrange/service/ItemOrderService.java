@@ -2,7 +2,7 @@ package com.example.petarrange.service;
 
 import com.example.petarrange.entity.ItemOrder;
 import com.example.petarrange.entity.ItemOrderArray;
-import com.example.petarrange.utils.Pager;
+//import com.example.petarrange.utils.Pager;
 import org.apache.ibatis.annotations.Param;
 
 public interface ItemOrderService{

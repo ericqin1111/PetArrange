@@ -26,7 +26,7 @@ $(document).ready(function () {
 
             success:function (response){
 
-                var userList=response;
+                var userList=response.userList;
 
                 var formContent = document.getElementById("user2_form");
                 // formContent.innerHTML="";
@@ -37,43 +37,38 @@ $(document).ready(function () {
                 }
 //测试
 
+                const totalPages = parseInt(response.totalPages);
+                // var page=parseInt(response.page);
+                const paginationContainer = document.getElementById("pangination");
+                paginationContainer.innerHTML = ""; // 清空现有内容
 
+                if (totalPages <= 5) {
+                    for (let i = 1; i <= totalPages; i++) {
+                        const button = document.createElement("button");
+                        button.innerText = i;
+                        button.id = "pageBtn" + i;
+                        button.setAttribute("data-page", i);
+                        paginationContainer.appendChild(button);
+                    }
+                } else if (totalPages > 5 ) {
+                    for (let i = 1; i <= 5; i++) {
+                        const button = document.createElement("button");
+                        button.innerText = i;
+                        button.id = "pageBtn" + i;
+                        button.setAttribute("data-page", i);
+                        paginationContainer.appendChild(button);
+                    }
+                    const span = document.createElement("span");
+                    span.innerText = "……";
+                    paginationContainer.appendChild(span);
 
-
-                //
-                // const sessionElement = document.getElementById("sessionData");
-                // const totalPages = parseInt(sessionElement.getAttribute("data-total-pages"));
-                // const currentPage = parseInt(sessionElement.getAttribute("data-current-page"));
-                //
-                // const paginationContainer = document.getElementById("pagination");
-                // paginationContainer.innerHTML = ""; // 清空现有内容
-                //
-                // if (totalPages <= 5) {
-                //     for (let i = 1; i <= totalPages; i++) {
-                //         const button = document.createElement("button");
-                //         button.innerText = i;
-                //         button.id = "pageBtn" + i;
-                //         button.setAttribute("data-page", i);
-                //         paginationContainer.appendChild(button);
-                //     }
-                // } else if (totalPages > 5 && currentPage <= 5) {
-                //     for (let i = 1; i <= 5; i++) {
-                //         const button = document.createElement("button");
-                //         button.innerText = i;
-                //         button.id = "pageBtn" + i;
-                //         button.setAttribute("data-page", i);
-                //         paginationContainer.appendChild(button);
-                //     }
-                //     const span = document.createElement("span");
-                //     span.innerText = "……";
-                //     paginationContainer.appendChild(span);
-                //
-                //     const lastPageButton = document.createElement("button");
-                //     lastPageButton.innerText = totalPages;
-                //     lastPageButton.id = "pageBtn" + totalPages;
-                //     lastPageButton.setAttribute("data-page", totalPages);
-                //     paginationContainer.appendChild(lastPageButton);
-                // } else if (totalPages > 5 && currentPage > 5 && currentPage + 2 <= totalPages) {
+                    const lastPageButton = document.createElement("button");
+                    lastPageButton.innerText = totalPages;
+                    lastPageButton.id = "pageBtn" + totalPages;
+                    lastPageButton.setAttribute("data-page", totalPages);
+                    paginationContainer.appendChild(lastPageButton);
+                }
+                // else if (totalPages > 5 && currentPage > 5 && currentPage + 2 <= totalPages) {
                 //     const firstPageButton = document.createElement("button");
                 //     firstPageButton.innerText = "1";
                 //     firstPageButton.setAttribute("data-page", 1);
@@ -116,7 +111,7 @@ $(document).ready(function () {
                 //         paginationContainer.appendChild(button);
                 //     }
                 // }
-                //
+
 
 
 
@@ -301,8 +296,13 @@ $(document).ready(function () {
         temDelButton.classList="temDel_btn";
         temDelButton.id="temDel_btn";
 
+        var checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.className = 'select-row';
+
         cellDel.appendChild(temDelButton);
 
+        blockCellCKB.appendChild(checkbox);
         // 创建输入框
         cellName.innerHTML = '<input type="text" id="temName" placeholder="输入用户名">';
         cellPassword.innerHTML = '<input type="temDel_btn" id="temDel" placeholder="输入密码">';
@@ -388,12 +388,12 @@ $(document).ready(function () {
         var checkedCheckboxes = document.querySelectorAll('.select-row:checked');
         var userList=[];
         var rowList=[];
+        var table=document.getElementById("user2_form");
         if(checkedCheckboxes.length===0){
             alert("未选中任何用户!");
         }
         else {
             checkedCheckboxes.forEach(function(checkbox) {
-                var table=document.getElementById("user2_form");
                 var row = checkbox.closest('tr');
                 var rowIndex=row.rowIndex;
                 var username=row.cells[1].textContent;
@@ -414,17 +414,14 @@ $(document).ready(function () {
                 if (response!=0){
                     console.log("删除成功");
                 }
-                // rowList.forEach(function (row1){
-                //     table.deleteRow(row1);
-                // })
+
+                var rows = Array.from(checkedCheckboxes).map(checkbox => checkbox.closest("tr"));
+                rows.reverse().forEach(row=>row.remove());
             },
             error:function (){
                 alert("删除失败");
             }
-            // checkedCheckboxes.forEach(function(checkbox) {
-            //     var table=document.getElementById("user2_form");
-            //     var row = button.parentElement.parentElement; // 获取 <tr> 行
-            //     var rowIndex=row.rowIndex;
+
         });
         // 输出选中的复选框的值
 

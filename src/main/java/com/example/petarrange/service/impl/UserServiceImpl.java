@@ -3,6 +3,7 @@ package com.example.petarrange.service.impl;
 import com.example.petarrange.entity.User;
 import com.example.petarrange.persistence.UserMapper;
 import com.example.petarrange.service.UserService;
+import com.example.petarrange.utils.AESUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -35,6 +36,10 @@ public class UserServiceImpl implements UserService {
     public List<User> selectAllUser() {
         List<User> list=new ArrayList<>();
         list=userMapper.selectAllUser();
+        for(User user:list){
+            user.setPassword(AESUtils.decrypt(user.getPassword()));
+            System.out.println(user.getPassword());
+        }
         return list;
     }
 
@@ -56,7 +61,11 @@ public class UserServiceImpl implements UserService {
     }
 
     public List<User> selectPageUser(int limit,int offset){
-        return userMapper.page(limit,offset);
+        List<User> userList= userMapper.page(limit,offset);
+        for (User user:userList){
+            user.setPassword(AESUtils.decrypt(user.getPassword()));
+        }
+        return userList;
     }
 
     public int count(){

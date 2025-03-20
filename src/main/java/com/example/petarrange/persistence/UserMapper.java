@@ -39,7 +39,9 @@ public interface UserMapper {
     //根据用户名查询用户
     public User findUserByName(@Param("username") String username);
 
+
 //    @Select("SELECT username,password FROM signon ORDER BY username DESC LIMIT #{limit} OFFSET #{offset}")
+
     @Select("SELECT username,password FROM signon LIMIT #{limit} OFFSET #{offset}")
     List<User> page(@Param("limit") int limit, @Param("offset") int offset);
 

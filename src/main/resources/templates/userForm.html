@@ -4,24 +4,18 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="/js/jquery.js"></script>
+    <style>
+        .data-cell {
+            border: 1px solid black;    /* 黑色边框 */
+            text-align: center;         /* 内容居中 */
+            padding: 8px;               /* 增加内边距使内容更美观 */
+        }
+    </style>
 </head>
 <body>
 
 
-<div class="leftbox">
-    <ul>
-        <li style="height: 200px;">
-            <p style="margin: 0; padding: 0; display: flex; align-items: center; justify-content: center; height: 100%;">
-                <img src="/img/logo.jpg" alt="Logo" style="max-width: 100%; max-height: 100%; object-fit: contain;">
-            </p>
-        </li>
-<!--        <li>-->
-<!--            <p><a th:href="@{/static}">首页</a></p>-->
-<!--        </li>-->
-<!--        <li>-->
-<!--            <p><a href="/itemOrder/orderForm">订单管理</a></p>-->
-<!--        </li>-->
-    </ul>
+<div class="leftbox" style="margin-left: 10px;margin-top: 10px;font-size: 20px">
 
     <div id="functionBar">
         <section class="filter-section">
@@ -34,11 +28,11 @@
     </div>
 </div>
 
-            <table id="user2_form">
+            <table id="user2_form" style="margin-left: 10px;margin-top: 10px;font-size: 20px">
                 <tr>
                         <th></th>
-                        <th>用户名</th>
-                        <th>密码</th>
+                        <th  style="text-align: center; border: 1px solid black;">用户名</th>
+                        <th  style="text-align: center; border: 1px solid black;">密码</th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -49,17 +43,24 @@
                     <th:block th:each="user,iterStat:${session.userList}">
                         <tr>
                             <td><input type="checkbox" class="select-row"></td>
-                            <td th:id="'name-'+${iterStat.index+1}" th:text="${user.username}">用户1</td>
-                            <td th:id="'password-'+${iterStat.index+1}" th:text="${user.password}">密码1</td>
-                            <td><button th:id="'ModBtn-'+${iterStat.index+1}" th:class="modify_btn" th:text="修改" ></button></td>
+                            <td th:id="'name-'+${iterStat.index+1}" style="text-align: center; border: 1px solid black;" th:text="${user.username}">用户1</td>
+                            <td th:id="'password-'+${iterStat.index+1}" style="text-align: center; border: 1px solid black;" th:text="${user.password}">密码1</td>
+                            <td><button th:id="'ModBtn-'+${iterStat.index+1}" th:class="modify_btn" th:text="修改"></button></td>
                             <td><button th:id="'DelBtn-'+${iterStat.index+1}" th:class="save_btn" th:text="保存"></button></td>
                         </tr>
+                    </th:block>
+                </div>
+            </table>
+
+<!-- ...其他代码保持不变... -->
+
+</tr>
                     </th:block>
                 </div>
 
             </table>
 
-            <div class="pangination" id="pangination">
+            <div class="pangination" id="pangination" style="margin-left: 10px;margin-top: 10px;font-size: 20px">
                 <tr>
                     <th:block th:if="${session.totalPages<=5}">
                         <button th:each="i:${#numbers.sequence(1,session.totalPages)}"

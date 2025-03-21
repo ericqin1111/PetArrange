@@ -6,21 +6,8 @@
     <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
 </head>
 <body>
-<div class="wrapper">
+<div class="wrapper" style="margin-left: 10px;margin-top: 10px;font-size: 18px">
     <div class="leftbox">
-        <ul>
-            <li style="height: 200px;">
-                <p style="margin: 0; padding: 0; display: flex; align-items: center; justify-content: center; height: 100%;">
-                    <img src="/img/logo.jpg" alt="Logo" style="max-width: 100%; max-height: 100%; object-fit: contain;">
-                </p>
-            </li>
-            <li>
-                <p><a href="/static">首页</a></p>
-            </li>
-            <li>
-                <p><a href="/itemOrder/orderForm">订单管理</a></p>
-            </li>
-        </ul>
     </div>
     <div class="rightbox">
         <div class="welcome-message">订单详情</div>
@@ -34,14 +21,16 @@
             <input type="text" name="status" th:value="${itemOrder.status}" placeholder="状态">
             <button type="submit">更新订单</button>
         </form>
-        <form action="/itemOrder/delete" method="post">
+        <div style="float: right">
+        <form action="/itemOrder/delete" method="post" style="margin-right: 15px">
             <input type="hidden" name="id" th:value="${itemOrder.id}">
             <button type="submit">删除订单</button>
         </form>
-        <form action="/itemOrder/ship" method="post">
+        <form action="/itemOrder/ship" method="post" >
             <input type="hidden" name="id" th:value="${itemOrder.id}">
             <button type="submit">发货</button>
         </form>
+        </div>
         <div th:if="${success != null}">
             <p th:text="${success}"></p>
         </div>

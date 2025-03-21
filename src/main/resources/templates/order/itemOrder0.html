@@ -2,30 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>订单管理</title>
+    <title></title>
     <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
 </head>
 <body>
-<div class="wrapper">
-    <div class="leftbox">
-        <ul>
-            <li style="height: 200px;">
-                <p style="margin: 0; padding: 0; display: flex; align-items: center; justify-content: center; height: 100%;">
-                    <img src="/img/logo.jpg" alt="Logo" style="max-width: 100%; max-height: 100%; object-fit: contain;">
-                </p>
-            </li>
-            <li>
-                <p><a th:href="@{/static}">首页</a></p>
-            </li>
-            <li>
-                <p><a href="/itemOrder/orderForm">订单管理</a></p>
-            </li>
-        </ul>
-    </div>
+<div class="wrapper" style="margin-left: 10px;margin-top: 10px;font-size: 20px">
+
     <div class="rightbox">
-        <div class="welcome-message">订单管理</div>
+        <!--        <div class="welcome-message">订单管理</div>-->
         <form id="search" method="post">
-            <input type="text" id="search_code" placeholder="订单编号">
+            <input type="text" id="search_code" placeholder="请输入订单编号">
             <button type="submit" onclick="searchForm()">查询</button>
         </form>
         <div th:if="${orderArray.itemOrders.isEmpty()}">
@@ -34,36 +20,46 @@
         <table th:if="${not orderArray.itemOrders.isEmpty()}">
             <thead>
             <tr>
-                <th>序号</th>
-                <th>订单编号</th>
-                <th>用户ID</th>
-                <th>商品ID</th>
-                <th>下单时间</th>
-                <th>购买数量</th>
-                <th>订单状态</th>
+                <th style="text-align: center; border: 1px solid black;">序号</th>
+                <th style="text-align: center; border: 1px solid black;">订单编号</th>
+                <th style="text-align: center; border: 1px solid black;">用户ID</th>
+                <th style="text-align: center; border: 1px solid black;">商品ID</th>
+                <th style="text-align: center; border: 1px solid black;">下单时间</th>
+                <th style="text-align: center; border: 1px solid black;">购买数量</th>
+                <th style="text-align: center; border: 1px solid black;">订单状态</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="itemOrder : ${orderArray?.itemOrders}">
-                <td th:text="${itemOrder?.id}"></td>
-                <td th:text="${itemOrder?.code}"></td>
-                <td th:text="${itemOrder?.userName}"></td>
-                <td th:text="${itemOrder?.itemId}"></td>
-                <td th:text="${itemOrder?.addTime}"></td>
-                <td th:text="${itemOrder?.total}"></td>
-                <td th:text="${itemOrder?.status}"></td>
-                <td th:switch="${itemOrder?.status}">
-                    <span th:case="0" >待发货</span>
-                    <span th:case="1" >已取消</span>
-                    <span th:case="2" >已发货</span>
-                    <span th:case="3" >已收货</span>
-                    <span th:case="4" >已评价</span>
-                    <span th:case="*" >未知状态</span>
+                <td th:text="${itemOrder?.id}" style="text-align: center; border: 1px solid black;"></td>
+                <td th:text="${itemOrder?.code}" style="text-align: center; border: 1px solid black;"></td>
+                <td th:text="${itemOrder?.userName}" style="text-align: center; border: 1px solid black;"></td>
+                <td th:text="${itemOrder?.itemId}" style="text-align: center; border: 1px solid black;"></td>
+                <td th:text="${itemOrder?.addTime}" style="text-align: center; border: 1px solid black;"></td>
+                <td th:text="${itemOrder?.total}" style="text-align: center; border: 1px solid black;"></td>
+
+                <!-- 状态列保持居中并添加边框 -->
+                <td style="text-align: center; border: 1px solid black;">
+        <span th:switch="${itemOrder?.status}" >
+            <span th:case="0">待发货</span>
+            <span th:case="1">已取消</span>
+            <span th:case="2">已发货</span>
+            <span th:case="3">已收货</span>
+            <span th:case="4">已评价</span>
+            <span th:case="*">未知状态</span>
+        </span>
                 </td>
-                <td>
+
+                <!-- 操作列保持居中并添加边框 -->
+                <td >
                     <a th:href="@{/itemOrder/detail/{id}(id=${itemOrder?.id})}">查看详情</a>
                 </td>
             </tr>
+
+<!--             在表格标签中添加边框合并样式（确保所有边框对齐）-->
+            <table style="border-collapse: collapse;">
+                <!-- 原有表格内容 -->
+            </table>
             </tbody>
         </table>
         <!--    <div th:if="${not orderArray.itemOrders.isEmpty()}">-->

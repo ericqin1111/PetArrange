@@ -2,6 +2,7 @@ package com.example.petarrange.service;
 
 import com.example.petarrange.entity.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface UserService {
@@ -12,7 +13,7 @@ public interface UserService {
     public int addUser(String username,String password);
 
     //删除用户
-    public int delUser(List<User> userList);
+    public int delUser(List<String> userList);
 
     //更新用户信息
     public int updateUser(User user);
@@ -24,4 +25,6 @@ public interface UserService {
     public User findUserByName(String username);
 
     public List<User> findUsersByUsernameLike(String username);
+
+
 }

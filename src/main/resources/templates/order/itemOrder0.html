@@ -2,92 +2,87 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>订单管理</title>
-    <!-- Layui 核心文件 -->
-    <link rel="stylesheet" href="/lib/layui/css/layui.css">
-    <script src="/lib/layui/layui.js"></script>
+    <title></title>
     <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
 </head>
 <body>
-<div class="layui-container" style="margin-top: 20px;">
-    <div class="layui-row">
+<div class="wrapper" style="margin-left: 10px;margin-top: 10px;font-size: 20px">
 
-        <!-- 右侧内容区域 -->
-        <div class="layui-col-md9">
-            <div class="layui-card">
-                <div class="layui-card-header">
-                    订单管理
-                </div>
-                <div class="layui-card-body">
-                    <!-- 搜索表单 -->
-                    <form class="layui-form" id="search" method="post" onsubmit="return searchForm();">
-                        <div class="layui-form-item">
-                            <div class="layui-input-inline">
-                                <input type="text" id="search_code" placeholder="订单编号" class="layui-input">
-                            </div>
-                            <div class="layui-input-inline">
-                                <button type="submit" class="layui-btn layui-btn-normal">查询</button>
-                            </div>
-                        </div>
-                    </form>
-                    <!-- 无订单提示 -->
-                    <div th:if="${orderArray.itemOrders.isEmpty()}">
-                        <p>没有找到相关订单</p>
-                    </div>
-                    <!-- 订单列表 -->
-                    <table class="layui-table" th:if="${not orderArray.itemOrders.isEmpty()}">
-                        <thead>
-                        <tr>
-                            <th>序号</th>
-                            <th>订单编号</th>
-                            <th>用户ID</th>
-                            <th>商品ID</th>
-                            <th>下单时间</th>
-                            <th>购买数量</th>
-                            <th>订单状态</th>
-                            <th>操作</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="itemOrder : ${orderArray?.itemOrders}">
-                            <td th:text="${itemOrder?.id}"></td>
-                            <td th:text="${itemOrder?.code}"></td>
-                            <td th:text="${itemOrder?.userName}"></td>
-                            <td th:text="${itemOrder?.itemId}"></td>
-                            <td th:text="${itemOrder?.addTime}"></td>
-                            <td th:text="${itemOrder?.total}"></td>
-                            <td>
-                                <span th:switch="${itemOrder?.status}">
-                                    <span th:case="0">待发货</span>
-                                    <span th:case="1">已取消</span>
-                                    <span th:case="2">已发货</span>
-                                    <span th:case="3">已收货</span>
-                                    <span th:case="4">已评价</span>
-                                    <span th:case="*">未知状态</span>
-                                </span>
-                            </td>
-                            <td>
-                                <a th:href="@{/itemOrder/detail/{id}(id=${itemOrder?.id})}" class="layui-btn layui-btn-xs">查看详情</a>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <!-- 如果需要分页，可在此处添加 Layui 分页组件 -->
-                </div>
-            </div>
+    <div class="rightbox">
+        <!--        <div class="welcome-message">订单管理</div>-->
+        <form id="search" method="post">
+            <input type="text" id="search_code" placeholder="请输入订单编号">
+            <button type="submit" onclick="searchForm()">查询</button>
+        </form>
+        <div th:if="${orderArray.itemOrders.isEmpty()}">
+            <p>没有找到相关订单</p>
         </div>
+        <table th:if="${not orderArray.itemOrders.isEmpty()}">
+            <thead>
+            <tr>
+                <th style="text-align: center; border: 1px solid black;">序号</th>
+                <th style="text-align: center; border: 1px solid black;">订单编号</th>
+                <th style="text-align: center; border: 1px solid black;">用户ID</th>
+                <th style="text-align: center; border: 1px solid black;">商品ID</th>
+                <th style="text-align: center; border: 1px solid black;">下单时间</th>
+                <th style="text-align: center; border: 1px solid black;">购买数量</th>
+                <th style="text-align: center; border: 1px solid black;">订单状态</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="itemOrder : ${orderArray?.itemOrders}">
+                <td th:text="${itemOrder?.id}" style="text-align: center; border: 1px solid black;"></td>
+                <td th:text="${itemOrder?.code}" style="text-align: center; border: 1px solid black;"></td>
+                <td th:text="${itemOrder?.userName}" style="text-align: center; border: 1px solid black;"></td>
+                <td th:text="${itemOrder?.itemId}" style="text-align: center; border: 1px solid black;"></td>
+                <td th:text="${itemOrder?.addTime}" style="text-align: center; border: 1px solid black;"></td>
+                <td th:text="${itemOrder?.total}" style="text-align: center; border: 1px solid black;"></td>
+
+                <!-- 状态列保持居中并添加边框 -->
+                <td style="text-align: center; border: 1px solid black;">
+        <span th:switch="${itemOrder?.status}" >
+            <span th:case="0">待发货</span>
+            <span th:case="1">已取消</span>
+            <span th:case="2">已发货</span>
+            <span th:case="3">已收货</span>
+            <span th:case="4">已评价</span>
+            <span th:case="*">未知状态</span>
+        </span>
+                </td>
+
+                <!-- 操作列保持居中并添加边框 -->
+                <td >
+                    <a th:href="@{/itemOrder/detail/{id}(id=${itemOrder?.id})}">查看详情</a>
+                </td>
+            </tr>
+
+<!--             在表格标签中添加边框合并样式（确保所有边框对齐）-->
+            <table style="border-collapse: collapse;">
+                <!-- 原有表格内容 -->
+            </table>
+            </tbody>
+        </table>
+        <!--    <div th:if="${not orderArray.itemOrders.isEmpty()}">-->
+        <!--      <a th:each="i : ${#numbers.sequence(1, pagers.total)}"-->
+        <!--         th:href="@{/itemOrder/findBySql(page=${i}, code=${obj.code})}"-->
+        <!--         th:text="${i}"></a>-->
+        <!--    </div>-->
     </div>
 </div>
 
+
 <script>
     function searchForm(){
-        var code = document.getElementById("search_code").value;
-        if(code.trim() === ''){
+        let code = document.getElementById("search_code").value;
+        if (code.trim() === '') {
             code = 'null';
         }
-        document.getElementById("search").action = "/itemOrder/orderForm/" + code;
-        return true; // 阻止默认提交行为由表单 action 处理
+        document.getElementById("search").action = `/itemOrder/orderForm/${code}`;
+        document.getElementById("search").submit();
+
     }
 </script>
+
+
 </body>
 </html>

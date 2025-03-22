@@ -28,7 +28,7 @@ public class HomeController {
     @GetMapping("/userManagement")
     public String dogs(Model model) {
         model.addAttribute("title", "用户管理");
-        return "pages/userManagement"; // 返回视图名称，Thymeleaf会查找templates/pages/userManagement.html
+        return "redirect:/user/FormPage"; // 返回视图名称，Thymeleaf会查找templates/pages/userManagement.html
     }
 
     @GetMapping("/productManagement")

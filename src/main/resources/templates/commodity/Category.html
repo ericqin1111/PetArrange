@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:c="http://www.w3.org/1999/html">
+<link rel="stylesheet" type="text/css" href="/styledemo.css">
+<head>
+  <meta charset="UTF-8">
+  <title>商品管理</title>
+</head>
+<body>
+<div>
+  <div class="welcome-message">商品类型管理</div>
+</div>
+<div class="wrapper">
+  <div class="leftbox">
+    <ul>
+      <li style="height: 200px;">
+        <p style="margin: 0; padding: 0; display: flex; align-items: center; justify-content: center; height: 100%;">
+          <img src="/img/logo.jpg" alt="Logo" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+        </p>
+      </li>
+      <li>
+        <p><a href="/index.html">首页</a></p>
+      </li>
+      <li>
+        <p><a href="/Commodity/allCategory">商品管理</a></p>
+      </li>
+      <li>
+        <p><a href="">用户管理</a></p>
+      </li>
+      <li>
+        <p><a href="">订单管理</a></p>
+      </li>
+    </ul>
+  </div>
+  <div class="wrapper">
+    <form method="post" th:action="@{/Commodity/Search}">
+      <div>
+        <ul style="padding-left: 10px;align-items: center">
+          <li>
+            <input type="text" placeholder="请输入商品名称" name="keyword" class="input"
+                   style="width: 250px;line-height: 17px;display: inline-block" />
+            <button type="submit">查询</button>
+<!--            <a href="/Commodity/toAddCategory">添加商品类型</a>-->
+          </li>
+        </ul>
+      </div>
+    </form>
+    <table class="action-bar">
+      <tr>
+        <th>类型编号</th>
+        <th>类型名称</th>
+<!--        <th>类型图片</th>-->
+        <th>操作</th>
+      </tr>
+      <c:forEach items="${pagers.category}" var="category" varStatus="l">
+        <tr th:each="category:${CategoryList}">
+          <td th:text="${category.catid}"></td>
+          <td th:text="${category.name}"></td>
+<!--          <td th:text="${category.descn}"></td>-->
+          <td>
+            <a class="" th:href="@{/Commodity/SomeCommodity(name=${category.catid})}"><span class="">修改</span> </a>
+            <a th:href="@{/Category/delCategory(name=${category.name})}">
+              <span>删除</span>
+            </a>
+          </td>
+        </tr>
+      </c:forEach>
+    </table>
+  </div>
+</div>
+<script>
+  function changeSearch(){
+    $("#{listform}").submit();
+  }
+</script>
+</body>
+</html>

@@ -14,7 +14,8 @@ html, body {
     width: 100vw;
     height: 100vh;
     position: relative;
-    display: flex; /* 使用flex布局 */
+    display:flex;
+    /* 使用flex布局 */
 }
 
 .rightbox {
@@ -84,7 +85,19 @@ html, body {
 .leftbox li:hover div.submenu {
     display: block;
 }
-
+.Commodity{
+    display: flex;
+}
+/* 操作栏样式 */
+.action-bar {
+    display: flex;
+    gap: 12px;
+    margin: 20px 0;
+    padding: 16px;
+    background: white;
+    border-radius: var(--table-border-color);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+}
 /* 新增：欢迎字样样式 */
 .welcome-message {
     width: 100%; /* 宽度占满父容器 */

@@ -1,89 +1,46 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org">
     <title>订单详情</title>
-    <!-- Layui 核心文件 -->
-    <link rel="stylesheet" href="/lib/layui/css/layui.css">
-    <script src="/lib/layui/layui.js"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
 </head>
 <body>
-<div class="layui-container" style="margin-top: 20px;">
-    <div class="layui-row">
-
-        <!-- 右侧内容区域 -->
-        <div class="layui-col-md9">
-            <div class="layui-card">
-                <div class="layui-card-header">订单详情</div>
-                <div class="layui-card-body">
-                    <!-- 更新订单表单 -->
-                    <form class="layui-form" action="/itemOrder/update" method="post">
-                        <input type="hidden" name="id" th:value="${itemOrder.id}">
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">订单编号</label>
-                            <div class="layui-input-block">
-                                <input type="text" name="code" th:value="${itemOrder.code}" placeholder="订单编号" class="layui-input">
-                            </div>
-                        </div>
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">用户ID</label>
-                            <div class="layui-input-block">
-                                <input type="text" name="userId" th:value="${itemOrder.userName}" placeholder="用户ID" class="layui-input">
-                            </div>
-                        </div>
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">商品ID</label>
-                            <div class="layui-input-block">
-                                <input type="text" name="itemId" th:value="${itemOrder.itemId}" placeholder="商品ID" class="layui-input">
-                            </div>
-                        </div>
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">下单时间</label>
-                            <div class="layui-input-block">
-                                <input type="text" name="addTime" th:value="${itemOrder.addTime}" placeholder="下单时间" class="layui-input">
-                            </div>
-                        </div>
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">购买数量</label>
-                            <div class="layui-input-block">
-                                <input type="text" name="total" th:value="${itemOrder.total}" placeholder="购买数量" class="layui-input">
-                            </div>
-                        </div>
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">状态</label>
-                            <div class="layui-input-block">
-                                <input type="text" name="status" th:value="${itemOrder.status}" placeholder="状态" class="layui-input">
-                            </div>
-                        </div>
-                        <div class="layui-form-item">
-                            <div class="layui-input-block">
-                                <button type="submit" class="layui-btn layui-btn-normal">更新订单</button>
-                            </div>
-                        </div>
-                    </form>
-                    <!-- 删除订单表单 -->
-                    <form class="layui-form" action="/itemOrder/delete" method="post" style="margin-top: 10px;margin-left: 110px;">
-                        <input type="hidden" name="id" th:value="${itemOrder.id}">
-                        <button type="submit" class="layui-btn layui-btn-danger">删除订单</button>
-                    </form>
-                    <!-- 发货操作表单 -->
-                    <form class="layui-form" action="/itemOrder/ship" method="post" style="margin-top: 10px;margin-left: 110px;">
-                        <input type="hidden" name="id" th:value="${itemOrder.id}">
-                        <button type="submit" class="layui-btn">发货</button>
-                    </form>
-
-                    <!-- 操作结果提示 -->
-                    <div th:if="${success != null}" style="margin-top: 10px;margin-left: 110px;">
-                        <p class="layui-text" th:text="${success}"></p>
-                    </div>
-                    <div th:if="${error}" style="margin-top: 10px;">
-                        <p class="layui-text layui-bg-red" th:text="${error}"></p>
-                    </div>
-                </div>
-            </div>
+<div class="wrapper" style="margin-left: 10px;margin-top: 10px;font-size: 18px">
+    <div class="leftbox">
+    </div>
+    <div class="rightbox">
+        <div class="welcome-message">订单详情</div>
+        <form action="/itemOrder/update" method="post">
+            <input type="hidden" name="id" th:value="${itemOrder.id}">
+            <input type="text" name="code" th:value="${itemOrder.code}" placeholder="订单编号">
+            <input type="text" name="userId" th:value="${itemOrder.userName}" placeholder="用户ID">
+            <input type="text" name="itemId" th:value="${itemOrder.itemId}" placeholder="商品ID">
+            <input type="text" name="addTime" th:value="${itemOrder.addTime}" placeholder="下单时间">
+            <input type="text" name="total" th:value="${itemOrder.total}" placeholder="购买数量">
+            <input type="text" name="status" th:value="${itemOrder.status}" placeholder="状态">
+            <button type="submit">更新订单</button>
+        </form>
+        <div style="float: right">
+        <form action="/itemOrder/delete" method="post" style="margin-right: 15px">
+            <input type="hidden" name="id" th:value="${itemOrder.id}">
+            <button type="submit">删除订单</button>
+        </form>
+        <form action="/itemOrder/ship" method="post" >
+            <input type="hidden" name="id" th:value="${itemOrder.id}">
+            <button type="submit">发货</button>
+        </form>
+        </div>
+        <div th:if="${success != null}">
+            <p th:text="${success}"></p>
+        </div>
+        <div th:if="${error}">
+            <p th:text="${error}"></p>
         </div>
     </div>
 </div>
 </body>
 </html>
+
+
+

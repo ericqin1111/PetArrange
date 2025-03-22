@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -173,8 +175,7 @@ public class CommodityController {
 
     @RequestMapping("/toAddCommodity")
     public String toAddCommodity(Model model,@Param("name") String name){
-        Commodity commodity = new Commodity();
-        model.addAttribute("commodity", commodity);
+
         //跳转到用户修改页面，同时将要修改的用户的信息传递过去
         return "/commodity/Add2";
     }
@@ -254,9 +255,9 @@ public class CommodityController {
     }
 
     @PostMapping("/addCommodity")
-    public String addCommodity(@ModelAttribute("commodity") Commodity commodity, Model model){
+    public String addCommodity(@ModelAttribute Commodity commodity, Model model) throws IOException {
         System.out.println("ssssssssssssssssssssss");
-        commodityService.addNew(commodity);
+        commodityService.addNew(commodity, commodity.getImage());
         return "redirect:/Commodity/allCategory";
     }
 

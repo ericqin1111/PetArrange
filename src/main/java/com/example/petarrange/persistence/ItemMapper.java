@@ -14,7 +14,7 @@ public interface ItemMapper extends BaseMapper<Item> {
     @Delete("DELETE from item where itemid = #{itemId}")
     public void delete(@Param("itemId") String itemid);
 
-    @Select("select * from inventory where itemid = #{itemid}")
+    @Select("select * from item where itemid = #{itemid}")
     public Item selectById(@Param("itemid") String itemid);
 
     @Insert("insert item (itemid,productid,listprice,unitcost,supplier,status,attr1,attr2,attr3,attr4,attr5)" +

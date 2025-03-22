@@ -1,7 +1,9 @@
 package com.example.petarrange.Service;
 
 import com.example.petarrange.entity.Commodity;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -20,5 +22,7 @@ public interface CommodityService {
     public Commodity findCommodityByItemId(String ItemId);
 
     public List<Commodity> findCommodityBynameLike(String name);
-    public void addNew(Commodity commodity);
+
+
+    void addNew(Commodity commodity, MultipartFile file) throws IOException;
 }

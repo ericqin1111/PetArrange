@@ -31,77 +31,78 @@
   </div>
   <div>
     <div class="body-content" style="display: flex">
-      <form th:action="@{/Commodity/addCommodity}" method="post" class="form-x" th:object="${commodity}">
+      <form th:action="@{/Commodity/addCommodity}" method="post" class="form-x" enctype="multipart/form-data" >
         <div class="form-group">
           <div class="label"><label>商品编号：</label></div>
           <div class="field">
-            <input type="text" class="input w50" th:field="*{itemId}" data-validate="required:请输入商品编号" />
+            <input type="text" class="input w50" name="itemId" data-validate="required:请输入商品编号" />
             <div class="tips"></div>
           </div>
         </div>
         <div class="form-group">
           <div class="label"><label>产品编号：</label></div>
           <div class="field">
-            <input type="text" class="input w50" th:field="*{productId}" data-validate="required:请输入产品编号" />
+            <input type="text" class="input w50" name="productId" data-validate="required:请输入产品编号" />
             <div class="tips"></div>
           </div>
-        <div class="form-group">
-          <div class="label"><label>商品名称：</label></div>
-          <div class="field">
-            <input type="text" class="input w50" th:field="*{name}" data-validate="required:请输入商品名称" />
-            <div class="tips"></div>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="label"><label>商品价格：</label></div>
-          <div class="field">
-            <input type="text" class="input w50" th:field="*{listprice}" data-validate="required:请输入商品价格" />
-            <div class="tips"></div>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="label"><label>商品成本价：</label></div>
-          <div class="field">
-            <input type="text" class="input w50" th:field="*{unitcost}" data-validate="required:请输入商品折扣" />
-            <div class="tips"></div>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="label"><label>商品数量：</label></div>
-          <div class="field">
-            <input type="text" class="input w50" th:field="*{quantity}" data-validate="required:请输入商品名称" />
-            <div class="tips"></div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <div class="label"><label>图片：</label></div>
-          <div class="field">
-            <input type="text" class="input w50" th:field="*{url}" data-validate="required:请输入商品名称" />
-            <div class="tips"></div>
-          </div>
-        </div>
           <div class="form-group">
-          <div class="label"><label>商品类别</label></div>
-          <div class="field">
-            <input type="text" class="input w50" th:field="*{category}" data-validate="required:请输入商品名称" />
-            <div class="tips"></div>
+            <div class="label"><label>商品名称：</label></div>
+            <div class="field">
+              <input type="text" class="input w50" name="name" data-validate="required:请输入商品名称" />
+              <div class="tips"></div>
+            </div>
           </div>
-        </div>
-<!--        <div class="form-group">-->
-<!--          <div class="label"><label>是否上架：</label></div>-->
-<!--          <div class="field">-->
-<!--            <input type="text" class="input w50" name="isDelete" data-validate="required:请输入商品名称" />-->
-<!--            <div class="tips"></div>-->
-<!--          </div>-->
-<!--        </div>-->
-        <div class="form-group">
-          <div class="label"></div>
-          <div class="field">
-            <button class="button bg-main icon-check-square-o" type="submit">提交</button>
-            <button class="button bg-main icon-check-square-o" type="reset">重置</button>
+          <div class="form-group">
+            <div class="label"><label>商品价格：</label></div>
+            <div class="field">
+              <input type="text" class="input w50" name="listprice" data-validate="required:请输入商品价格" />
+              <div class="tips"></div>
+            </div>
           </div>
-        </div>
+          <div class="form-group">
+            <div class="label"><label>商品成本价：</label></div>
+            <div class="field">
+              <input type="text" class="input w50" name="unitcost" data-validate="required:请输入商品折扣" />
+              <div class="tips"></div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="label"><label>商品数量：</label></div>
+            <div class="field">
+              <input type="text" class="input w50" name="quantity" data-validate="required:请输入商品名称" />
+              <div class="tips"></div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="label"><label>url：</label></div>
+            <div class="field">
+              <input type="text" class="input w50" name="url" data-validate="required:请输入商品名称" />
+              <div class="tips"></div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="label"><label>商品类别</label></div>
+            <div class="field">
+              <input type="text" class="input w50" name="category" data-validate="required:请输入商品名称" />
+              <div class="tips"></div>
+            </div>
+          </div>
+
+                  <div class="form-group">
+                    <div class="label"><label>图片：</label></div>
+                    <div class="field">
+                      <input type="file" class="input w50" name="image" data-validate="required:请输入商品名称" />
+                      <div class="tips"></div>
+                    </div>
+                  </div>
+          <div class="form-group">
+            <div class="label"></div>
+            <div class="field">
+              <button class="button bg-main icon-check-square-o" type="submit">提交</button>
+              <button class="button bg-main icon-check-square-o" type="reset">重置</button>
+            </div>
+          </div>
         </div>
       </form>
       <a href="/Commodity/allCommodity">返回</a>

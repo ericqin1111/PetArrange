@@ -5,11 +5,11 @@ import com.example.petarrange.entity.*;
 import com.example.petarrange.persistence.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Base64;
 import java.util.List;
 
 @Service("CommodityService")
@@ -119,10 +119,18 @@ public class CommodityServiceImpl implements CommodityService {
     }
 
     @Override
-    public void addNew(Commodity commodity) {
+    public void addNew(Commodity commodity, MultipartFile file) throws IOException {
         Inventory inventory = new Inventory();
         Item item = new Item();
         Product product = new Product();
+
+        if (!file.isEmpty()) {
+            Image image = new Image();
+            image.setFile_name("q1");
+            image.setImage_data(file.getBytes());
+            image.setItemid(commodity.getItemId());
+            imagesMapper.insert(image);
+        }
 
         //itemid在数据表存在不添加
         if(inventoryMapper.selectById(commodity.getItemId())==null){
@@ -142,6 +150,7 @@ public class CommodityServiceImpl implements CommodityService {
 
         //itemid在数据表存在不添加
         if(itemMapper.selectById(commodity.getItemId())==null){
+            System.out.println("sadasdasdsaaszasa");
             item.setItemid(commodity.getItemId());
             item.setProductid(commodity.getProductId());
             item.setListprice(commodity.getListprice());

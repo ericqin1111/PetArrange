@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:c="http://www.w3.org/1999/html">
+<link rel="stylesheet" type="text/css" href="/styledemo.css">
+<head>
+  <meta charset="UTF-8">
+  <title>商品管理</title>
+</head>
+<body style="overflow-y:scroll">
+<div>
+  <div class="welcome-message">商品管理</div>
+</div>
+<div class="wrapper">
+  <div class="leftbox">
+    <ul>
+      <li style="height: 200px;">
+        <p style="margin: 0; padding: 0; display: flex; align-items: center; justify-content: center; height: 100%;">
+          <img src="/img/logo.jpg" alt="Logo" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+        </p>
+      </li>
+      <li>
+        <p><a href="/index.html">首页</a></p>
+      </li>
+      <li>
+        <p><a href="/Commodity/allCategory">商品管理</a></p>
+      </li>
+      <li>
+        <p><a href="">用户管理</a></p>
+      </li>
+      <li>
+        <p><a href="">订单管理</a></p>
+      </li>
+    </ul>
+  </div>
+  <div class="wrapper">
+   <form method="post" th:action="@{/Commodity/search}">
+      <div>
+        <ul style="padding-left: 10px;align-items: center">
+          <li>
+<!--              <input type="text" placeholder="请输入商品名称" name="keyword" class="input"-->
+<!--                         style="width: 250px;line-height: 17px;display: inline-block" />-->
+<!--              <button type="submit">查询</button>-->
+            <a th:href="@{/Commodity/toAddCommodity}">添加商品</a>
+          </li>
+        </ul>
+      </div>
+    </form>
+    <table>
+      <tr>
+        <th>商品编号</th>
+        <th>商品种类</th>
+        <th>商品名称</th>
+        <th>商品图片</th>
+        <th>商品价格</th>
+        <th>商品折后价</th>
+        <th>商品数目</th>
+<!--        <th>是否上架</th>-->
+        <th>操作</th>
+      </tr>
+        <tr th:each="commodity:${CommodityList}">
+          <td th:text="${commodity.itemId}"></td>
+          <td th:text="${commodity.productId}"></td>
+          <td th:text="${commodity.name}"></td>
+          <td th:img="${commodity.url}" style="width: 100px;height: 100px;"></td>
+          <td th:text="${commodity.listprice}"></td>
+          <td th:text="${commodity.unitcost}"></td>
+          <td th:text="${commodity.quantity}"></td>
+<!--          <td th:switch="${commodity.isDelete}">-->
+<!--            <span th:case="0">是</span>-->
+<!--            <span th:case="*">否</span>-->
+<!--          </td>-->
+          <td>
+            <a th:href="@{/Commodity/toUpdateCommodity(name=${commodity.itemId})}"><span>修改</span> </a>
+            <a th:href="@{/Commodity/delCommodity(name=${commodity.itemId})}">
+              <span>删除</span>
+            </a>
+          </td>
+        </tr>
+      <tr>
+        <td colspan="8">
+          <div class="action-bar">
+            <!--分页开始-->
+            <pager url="${ctx}/Commodity/findBySql" maxIndexPages="5" items="${pagers.total}" maxPageItems="15" export="curPage=pageNumber">
+                  <a href="/Commodity/allCategory">返回类型管理</a>
+            </pager>
+          </div>
+
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+<script>
+  function changeSearch(){
+    $("#{listform}").submit();
+  }
+</script>
+</body>
+</html>

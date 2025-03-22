@@ -9,11 +9,12 @@ import lombok.Getter;
 @Data
 @TableName("category")
 public class Category {
-    @TableId(value ="catid")
-    private String categoryId;
-    @Getter
+    @TableId("catid")
+    private String catid;
+    @TableField("name")
     private String name;
     @TableField("descn")
-    private String description;
+    private String descn;
+
 
 }

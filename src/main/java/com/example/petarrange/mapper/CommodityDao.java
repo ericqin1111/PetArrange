@@ -1,13 +1,13 @@
 package com.example.petarrange.mapper;
 
-import com.example.petarrange.base.BaseDao;
+
 import com.example.petarrange.po.Commodity;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 import java.util.Map;
 @Mapper
-public interface CommodityDao extends BaseDao<Commodity>{
+public interface CommodityDao{
         // 新增商品
         @Insert("INSERT INTO Commodity (name, id, listprice, url, isDeletes,amount,description) " +
                 "VALUES (#{name}, #{id}, #{listprice}, #{url}, #{isDelete},#{amount},#{description}")

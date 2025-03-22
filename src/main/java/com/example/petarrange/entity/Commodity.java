@@ -26,6 +26,7 @@ public class Commodity implements Serializable {
 
     private String category;
 
+
 //    private Integer isDelete= 0;
 
 

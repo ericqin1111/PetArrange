@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:c="http://www.w3.org/1999/html">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" type="text/css" href="/styledemo.css">
 <head>
   <meta charset="UTF-8">
@@ -60,7 +60,7 @@
           <td th:text="${commodity.itemId}"></td>
           <td th:text="${commodity.productId}"></td>
           <td th:text="${commodity.name}"></td>
-          <td th:img="${commodity.url}" style="width: 100px;height: 100px;"></td>
+          <td><img th:src="@{/image/gif/{id}(id=${commodity.itemId})}" alt=""  style="max-width: 500px;"/></td>
           <td th:text="${commodity.listprice}"></td>
           <td th:text="${commodity.unitcost}"></td>
           <td th:text="${commodity.quantity}"></td>

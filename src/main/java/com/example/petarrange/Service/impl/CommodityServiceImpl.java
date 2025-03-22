@@ -1,19 +1,15 @@
 package com.example.petarrange.Service.impl;
 
 import com.example.petarrange.Service.CommodityService;
-import com.example.petarrange.entity.Inventory;
-import com.example.petarrange.entity.Item;
-import com.example.petarrange.entity.Product;
-import com.example.petarrange.persistence.CommodityMapper;
-import com.example.petarrange.entity.Commodity;
-import com.example.petarrange.persistence.InventoryMapper;
-import com.example.petarrange.persistence.ItemMapper;
-import com.example.petarrange.persistence.ProductMapper;
+import com.example.petarrange.entity.*;
+import com.example.petarrange.persistence.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
 
 @Service("CommodityService")
@@ -26,6 +22,8 @@ public class CommodityServiceImpl implements CommodityService {
     private ItemMapper itemMapper;
     @Autowired
     private ProductMapper productMapper;
+    @Autowired
+    private ImagesMapper imagesMapper;
 
     @Override
     public int insert(String id, String name, BigDecimal listprice, BigDecimal unitcode, int amount, String url, String category, int isDelete) {
@@ -59,8 +57,8 @@ public class CommodityServiceImpl implements CommodityService {
     public List<Commodity> selectSomeCommodity(String category) {
         List<Commodity> list = new ArrayList<>();
         list = commodityMapper.findCommodityByCategory(category);
-        if (list.isEmpty()) {
-            System.out.println("baddddddddd");
+        for (Commodity commodity : list) {
+
         }
         return list;
     }
@@ -76,7 +74,6 @@ public class CommodityServiceImpl implements CommodityService {
             Product product = productMapper.selectById(commodity.getProductId());
             product.setCategory(commodity.getCategory());
             product.setName(commodity.getName());
-            product.setPic(commodity.getUrl());
             product.setDescn(commodity.getUrl());
             productMapper.update(product);
 
@@ -139,7 +136,6 @@ public class CommodityServiceImpl implements CommodityService {
         product.setCategory(commodity.getCategory());
         product.setProductid(commodity.getProductId());
         product.setName(commodity.getName());
-        product.setPic(commodity.getUrl());
         product.setDescn(commodity.getUrl());
         productMapper.Add(product);
         }

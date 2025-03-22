@@ -13,14 +13,13 @@ public interface ProductMapper extends BaseMapper<Product> {
     @Select("select * from product where productid = #{productid}")
     public Product selectById(@Param("productid") String productid);
 
-    @Insert("insert product (productid,category,name,descn,pic) values (#{productid},#{category},#{name},#{descn},#{pic})")
+    @Insert("insert product (productid,category,name,descn) values (#{productid},#{category},#{name},#{descn})")
     public void Add(Product product);
 
     @Update("update product set "+
             "category=#{category}, "+
             "name=#{name}, "+
-            "descn=#{descn}, "+
-            "pic=#{pic} "+
-            "where productid=#{productid}")
+            "descn=#{descn} "+
+            "where productid = #{productid}")
     public void update(Product product);
 }

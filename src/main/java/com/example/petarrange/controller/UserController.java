@@ -1,5 +1,6 @@
 package com.example.petarrange.controller;
 
+import com.example.petarrange.entity.User;
 import com.example.petarrange.service.impl.UserServiceImpl;
 import jakarta.servlet.http.HttpSession;
 import org.apache.ibatis.annotations.Param;

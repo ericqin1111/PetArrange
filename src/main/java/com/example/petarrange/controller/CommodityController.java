@@ -2,6 +2,8 @@ package com.example.petarrange.controller;
 
 import com.example.petarrange.entity.Category;
 import com.example.petarrange.entity.Commodity;
+import com.example.petarrange.service.impl.CategoryServiceImpl;
+import com.example.petarrange.service.impl.CommodityServiceImpl;
 import jakarta.servlet.http.HttpSession;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;

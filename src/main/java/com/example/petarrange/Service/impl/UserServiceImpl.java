@@ -1,7 +1,9 @@
 package com.example.petarrange.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.petarrange.entity.User;
 import com.example.petarrange.persistence.UserMapper;
+import com.example.petarrange.service.UserService;
 import com.example.petarrange.utils.AESUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service("userService")
-public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements UserService {
+public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
     @Autowired
     UserMapper userMapper;
     @Override

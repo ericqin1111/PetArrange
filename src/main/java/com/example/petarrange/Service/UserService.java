@@ -1,6 +1,7 @@
 package com.example.petarrange.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.example.petarrange.entity.User;
 
 import java.util.List;
 

@@ -1,11 +1,10 @@
 package com.example.petarrange.service;
 
-import com.example.petarrange.entity.User;
+import com.baomidou.mybatisplus.extension.service.IService;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public interface UserService {
+public interface UserService  extends IService<User> {
 
 
 

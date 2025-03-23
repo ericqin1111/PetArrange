@@ -1,4 +1,4 @@
-package com.example.petarrange.Service.impl;
+package com.example.petarrange.service.impl;
 
 import com.example.petarrange.Service.CommodityService;
 import com.example.petarrange.entity.*;

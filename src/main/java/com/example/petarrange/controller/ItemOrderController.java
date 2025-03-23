@@ -26,7 +26,7 @@ public class ItemOrderController  {
     @RequestMapping("/orderForm0")
     public String orderForm0(Model model) {
         ItemOrderArray itemOrderArray = itemOrderService.getAllOrders();
-        System.out.println(itemOrderArray);
+//        System.out.println(itemOrderArray);
         model.addAttribute("orderArray", itemOrderArray);
 
         return "/order/itemOrder0";

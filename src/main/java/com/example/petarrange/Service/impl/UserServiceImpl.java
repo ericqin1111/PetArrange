@@ -1,18 +1,16 @@
 package com.example.petarrange.service.impl;
 
-import com.example.petarrange.entity.User;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.petarrange.persistence.UserMapper;
-import com.example.petarrange.service.UserService;
 import com.example.petarrange.utils.AESUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service("userService")
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements UserService {
     @Autowired
     UserMapper userMapper;
     @Override
@@ -24,7 +22,7 @@ public class UserServiceImpl implements UserService {
     public int delUser(List<String> userList) {
         int count=0;
         for(String username:userList){
-            userMapper.delUser(username);
+//            userMapper.delUser(username);
             count++;
         }
         return count;
@@ -68,9 +66,8 @@ public class UserServiceImpl implements UserService {
         return userList;
     }
 
-    public int count(){
-
-        System.out.println(userMapper.getCount());
+    public int countNum(){
+        System.out.println("总数"+userMapper.getCount());
         return userMapper.getCount();
     }
 }

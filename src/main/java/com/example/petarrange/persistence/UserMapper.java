@@ -1,9 +1,7 @@
 package com.example.petarrange.persistence;
 
 
-import com.example.petarrange.annotation.EncryptField;
 import com.example.petarrange.annotation.EncryptMethod;
-import com.example.petarrange.entity.User;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

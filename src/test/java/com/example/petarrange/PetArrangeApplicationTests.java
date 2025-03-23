@@ -1,15 +1,10 @@
 package com.example.petarrange;
 
 import com.example.petarrange.persistence.CategoryMapper;
-import com.example.petarrange.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
 class PetArrangeApplicationTests {

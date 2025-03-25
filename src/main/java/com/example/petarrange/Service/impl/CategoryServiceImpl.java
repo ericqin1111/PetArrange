@@ -2,7 +2,7 @@ package com.example.petarrange.service.impl;
 
 
 
-import com.example.petarrange.Service.CategoryService;
+import com.example.petarrange.service.CategoryService;
 import com.example.petarrange.entity.Category;
 import com.example.petarrange.persistence.CategoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;

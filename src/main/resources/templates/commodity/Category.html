@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <title>商品管理</title>
 </head>
-<body>
+<body style="font-size: 20px">
 <div>
   <div class="welcome-message">商品类型管理</div>
 </div>
@@ -41,6 +41,14 @@
             <button type="submit">查询</button>
             <a href="/Commodity/toAddCategory">添加商品类型</a>
           </li>
+
+              <li>
+                <!--              <input type="text" placeholder="请输入商品名称" name="keyword" class="input"-->
+                <!--                         style="width: 250px;line-height: 17px;display: inline-block" />-->
+                <!--              <button type="submit">查询</button>-->
+                <a th:href="@{/Commodity/toAddCategory}">添加商品</a>
+              </li>
+
         </ul>
       </div>
     </form>

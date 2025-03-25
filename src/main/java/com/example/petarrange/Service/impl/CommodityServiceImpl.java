@@ -1,6 +1,6 @@
-package com.example.petarrange.Service.impl;
+package com.example.petarrange.service.impl;
 
-import com.example.petarrange.Service.CommodityService;
+import com.example.petarrange.service.CommodityService;
 import com.example.petarrange.entity.*;
 import com.example.petarrange.persistence.*;
 import org.springframework.beans.factory.annotation.Autowired;

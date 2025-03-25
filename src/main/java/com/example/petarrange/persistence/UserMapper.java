@@ -1,7 +1,7 @@
 package com.example.petarrange.persistence;
 
 
-import com.example.petarrange.annotation.EncryptField;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.petarrange.annotation.EncryptMethod;
 import com.example.petarrange.entity.User;
 import org.apache.ibatis.annotations.*;
@@ -10,7 +10,7 @@ import java.util.List;
 
 
 @Mapper
-public interface UserMapper {
+public interface UserMapper extends BaseMapper<User> {
 
     @EncryptMethod
     //添加用户
@@ -42,7 +42,7 @@ public interface UserMapper {
 
 //    @Select("SELECT username,password FROM signon ORDER BY username DESC LIMIT #{limit} OFFSET #{offset}")
 
-    @Select("SELECT username,password FROM signon LIMIT #{limit} OFFSET #{offset}")
+    @Select("SELECT * FROM signon LIMIT #{limit} OFFSET #{offset}")
     List<User> page(@Param("limit") int limit, @Param("offset") int offset);
 
     @Select("SELECT COUNT(*) FROM signon")

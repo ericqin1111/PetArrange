@@ -26,7 +26,7 @@ public class ItemOrderController  {
     @RequestMapping("/orderForm0")
     public String orderForm0(Model model) {
         ItemOrderArray itemOrderArray = itemOrderService.getAllOrders();
-        System.out.println(itemOrderArray);
+//        System.out.println(itemOrderArray);
         model.addAttribute("orderArray", itemOrderArray);
 
         return "/order/itemOrder0";
@@ -103,7 +103,7 @@ public class ItemOrderController  {
             model.addAttribute("success", null);
         }
         model.addAttribute("itemOrder", itemOrder);
-        return "/order/itemOrderDetail";
+        return "/order/itemOrderDetail0";
     }
 
     @PostMapping("/update")

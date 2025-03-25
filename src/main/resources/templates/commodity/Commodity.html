@@ -39,7 +39,7 @@
 <!--              <input type="text" placeholder="请输入商品名称" name="keyword" class="input"-->
 <!--                         style="width: 250px;line-height: 17px;display: inline-block" />-->
 <!--              <button type="submit">查询</button>-->
-            <a th:href="@{/Commodity/toAddCommodity}">添加商品</a>
+            <a th:href="@{/Commodity/toAddCommodity(category=${category})}">添加商品</a>
           </li>
         </ul>
       </div>

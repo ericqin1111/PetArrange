@@ -23,6 +23,7 @@ public class CategoryServiceImpl  implements CategoryService {
 
     @Override
     public int delete(String name) {//存疑
+        System.out.println("sadddddddddddddddddddddddddddd");
         return categoryMapper.delete(name);
     }
 

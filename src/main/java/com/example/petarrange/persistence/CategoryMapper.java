@@ -15,7 +15,7 @@ public interface CategoryMapper  {
     @Insert("insert into category(catid,name,descn) values (#{catid},#{name},#{descn})")
     public int insert(@Param("catid")String catid, @Param("name")String name, @Param("descn") String descn);
 
-    @Delete("delete from category where name =#{name}")
+    @Delete("delete from category where catid =#{name}")
     //删除用户  根据id
     public int delete(@Param("name") String name);
 

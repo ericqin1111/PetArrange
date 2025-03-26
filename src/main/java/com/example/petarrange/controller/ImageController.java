@@ -36,7 +36,7 @@ public class ImageController {
 
 
         if (img!= null) {
-            response.setContentType("image/png");
+            response.setContentType("image/jpg");
             try(InputStream in = new ByteArrayInputStream(img);
                 OutputStream out = response.getOutputStream()) {
                 byte[] buffer = new byte[4096];

@@ -1,5 +1,6 @@
 package com.example.petarrange.controller;
 
+import com.example.petarrange.annotation.EncryptMethod;
 import com.example.petarrange.entity.User;
 import com.example.petarrange.service.impl.UserServiceImpl;
 import jakarta.servlet.http.HttpSession;
@@ -50,6 +51,7 @@ public class UserController {
     //接收添加用户表单的数据，进行正式的添加用户，添加完成后，重定向到所有用户页面
     @RequestMapping("/addUser")
     @ResponseBody
+    @EncryptMethod
     public int addUser(@Param("username") String username, @Param("password") String password) {
         User user = new User();
         user = userService.findUserByName(username);

@@ -1,6 +1,8 @@
 package com.example.petarrange.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.example.petarrange.annotation.EncryptMethod;
+
 import com.example.petarrange.entity.User;
 
 import java.util.List;
@@ -8,8 +10,6 @@ import java.util.List;
 public interface UserService  extends IService<User> {
 
 
-
-    //添加用户
     public int addUser(String username,String password);
 
     //删除用户

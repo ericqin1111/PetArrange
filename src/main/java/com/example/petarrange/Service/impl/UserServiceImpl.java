@@ -1,12 +1,15 @@
 package com.example.petarrange.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.petarrange.annotation.EncryptMethod;
+
 import com.example.petarrange.entity.User;
 import com.example.petarrange.persistence.UserMapper;
 import com.example.petarrange.service.UserService;
 import com.example.petarrange.utils.AESUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.logging.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +18,17 @@ import java.util.List;
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
     @Autowired
     UserMapper userMapper;
+
+
+    Logger logger=Logger.getLogger("UserServiceImpl");
+
     @Override
+    @EncryptMethod
     public int addUser(String username,String password) {
+        logger.info(password);
+        logger.info(username);
+        System.out.println("username"+username);
+        System.out.println("password"+password);
         return userMapper.addUser(username,password);
     }
 
@@ -62,9 +74,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     public List<User> selectPageUser(int limit,int offset){
         List<User> userList= userMapper.page(limit,offset);
-        for (User user:userList){
-            user.setPassword(AESUtils.decrypt(user.getPassword()));
-        }
         return userList;
     }
 

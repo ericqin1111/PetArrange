@@ -168,13 +168,14 @@ public class CommodityController {
         //使用业务层调用dao层查询出数据，通过model对象渲染到前台页面
         System.out.println(name);
         List<Commodity> commodityList = commodityService.selectSomeCommodity(name);
+        model.addAttribute("category", name);
         model.addAttribute("CommodityList",commodityList);
         return "/commodity/Commodity";
     }
 
     @RequestMapping("/toAddCommodity")
-    public String toAddCommodity(Model model,@Param("name") String name){
-
+    public String toAddCommodity(Model model,@Param("category") String category){
+        model.addAttribute("category" ,category);
         //跳转到用户修改页面，同时将要修改的用户的信息传递过去
         return "/commodity/Add2";
     }

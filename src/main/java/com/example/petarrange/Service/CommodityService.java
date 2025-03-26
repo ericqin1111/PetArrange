@@ -1,4 +1,4 @@
-package com.example.petarrange.Service;
+package com.example.petarrange.service;
 
 import com.example.petarrange.entity.Commodity;
 import org.springframework.web.multipart.MultipartFile;

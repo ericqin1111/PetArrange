@@ -2,10 +2,12 @@ package com.example.petarrange.service.impl;
 
 
 
+import com.example.petarrange.persistence.ProductMapper;
 import com.example.petarrange.service.CategoryService;
 import com.example.petarrange.entity.Category;
 import com.example.petarrange.persistence.CategoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,6 +18,9 @@ public class CategoryServiceImpl  implements CategoryService {
     @Autowired
     private CategoryMapper categoryMapper;
 
+    @Autowired
+    private ProductMapper productMapper;
+
     @Override
     public int insert(String catid, String name,String descn) {
         return categoryMapper.insert(catid,name,descn);
@@ -24,6 +29,8 @@ public class CategoryServiceImpl  implements CategoryService {
     @Override
     public int delete(String name) {//存疑
         System.out.println("sadddddddddddddddddddddddddddd");
+        productMapper.delete(name);
+        System.out.println("deleted product");
         return categoryMapper.delete(name);
     }
 

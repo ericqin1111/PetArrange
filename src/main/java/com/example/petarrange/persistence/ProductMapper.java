@@ -22,4 +22,7 @@ public interface ProductMapper extends BaseMapper<Product> {
             "descn=#{descn} "+
             "where productid = #{productid}")
     public void update(Product product);
+
+    @Delete("delete from product where category = #{name}")
+    public void delete(@Param("name") String name);
 }

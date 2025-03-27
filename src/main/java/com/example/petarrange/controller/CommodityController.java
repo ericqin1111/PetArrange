@@ -78,8 +78,9 @@ public class CommodityController {
     //删除
     @RequestMapping("/delCategory")
     public String delcategory(@Param("name")String name) {
-
+        System.out.println("wwooooooooooooooooo");
         categoryService.delete(name);
+        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaa");
         return "redirect:/Commodity/allCategory";
     }
 

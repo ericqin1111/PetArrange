@@ -1,96 +1,250 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<link rel="stylesheet" type="text/css" href="/styledemo.css">
 <head>
   <meta charset="UTF-8">
   <title>商品管理</title>
+  <style>
+    /* 全局样式 */
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      background-color: #f9f9f9;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* 头部样式 */
+    .welcome-message {
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: #4CAF50;
+      margin-top: 20px;
+    }
+
+    /* 左侧导航栏 */
+    .leftbox {
+      width: 200px;
+      float: left;
+      background-color: #fff;
+      border-right: 1px solid #ddd;
+      height: 100vh;
+      box-shadow: 2px 0 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .leftbox ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .leftbox li {
+      padding: 15px;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+    }
+
+    .leftbox a {
+      text-decoration: none;
+      color: #4CAF50;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .leftbox a:hover {
+      color: #45a049;
+      text-decoration: underline;
+    }
+
+    /* 主内容区域 */
+    .wrapper {
+      margin-left: 100px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin-top: 100px;
+      margin-right: 100px;
+      /*margin-left: 220px; !* 留出左侧导航栏的空间 *!*/
+      /*padding: 20px;*/
+      /*background-color: #fff;*/
+      /*border-radius: 8px;*/
+      /*box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);*/
+    }
+
+    /* 搜索框样式 */
+    form {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    form input {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+      transition: border-color 0.3s ease;
+      width: 300px;
+    }
+
+    form input:focus {
+      border-color: #4CAF50;
+      outline: none;
+    }
+
+    form button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      background-color: #4CAF50;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    form button:hover {
+      background-color: #45a049;
+    }
+
+    /* 表格样式 */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    table th,
+    table td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+
+    table th {
+      background-color: #4CAF50;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    table tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    table tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    /* 图片样式 */
+    table img {
+      max-width: 100px;
+      height: auto;
+      border-radius: 4px;
+    }
+
+    /* 操作按钮样式 */
+    table a {
+      margin: 0 5px;
+      text-decoration: none;
+      color: #4CAF50;
+      font-weight: bold;
+    }
+
+    table a:hover {
+      text-decoration: underline;
+    }
+
+    /* 分页样式 */
+    .action-bar {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .action-bar a {
+      margin: 0 10px;
+      color: #4CAF50;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .action-bar a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
-<body style="overflow-y:scroll;font-size: 20px">
+<body>
 <div>
   <div class="welcome-message">商品管理</div>
 </div>
-<div class="wrapper">
-  <div class="leftbox">
-    <ul>
-      <li style="height: 200px;">
-        <p style="margin: 0; padding: 0; display: flex; align-items: center; justify-content: center; height: 100%;">
-          <img src="/img/logo.jpg" alt="Logo" style="max-width: 100%; max-height: 100%; object-fit: contain;">
-        </p>
-      </li>
-      <li>
-        <p><a href="/index.html">首页</a></p>
-      </li>
-      <li>
-        <p><a href="/Commodity/allCategory">商品管理</a></p>
-      </li>
-      <li>
-        <p><a href="/home/userManagement">用户管理</a></p>
-      </li>
-      <li>
-        <p><a href="/itemOrder/orderForm">订单管理</a></p>
-      </li>
-    </ul>
-  </div>
-  <div class="wrapper">
-   <form method="post" th:action="@{/Commodity/search}">
-      <div>
-        <ul style="padding-left: 10px;align-items: center">
-          <li>
-<!--              <input type="text" placeholder="请输入商品名称" name="keyword" class="input"-->
-<!--                         style="width: 250px;line-height: 17px;display: inline-block" />-->
-<!--              <button type="submit">查询</button>-->
-            <a th:href="@{/Commodity/toAddCommodity(category=${category})}">添加商品</a>
-          </li>
-        </ul>
-      </div>
-    </form>
-    <table>
-      <tr>
-        <th>商品编号</th>
-        <th>商品种类</th>
-        <th>商品名称</th>
-        <th>商品图片</th>
-        <th>商品价格</th>
-        <th>商品折后价</th>
-        <th>商品数目</th>
-<!--        <th>是否上架</th>-->
-        <th>操作</th>
-      </tr>
-        <tr th:each="commodity:${CommodityList}">
-          <td th:text="${commodity.itemId}"></td>
-          <td th:text="${commodity.productId}"></td>
-          <td th:text="${commodity.name}"></td>
-          <td><img th:src="@{/image/gif/{id}(id=${commodity.itemId})}" alt=""  style="max-width: 500px;"/></td>
-          <td th:text="${commodity.listprice}"></td>
-          <td th:text="${commodity.unitcost}"></td>
-          <td th:text="${commodity.quantity}"></td>
-<!--          <td th:switch="${commodity.isDelete}">-->
-<!--            <span th:case="0">是</span>-->
-<!--            <span th:case="*">否</span>-->
-<!--          </td>-->
-          <td>
-            <a th:href="@{/Commodity/toUpdateCommodity(name=${commodity.itemId})}"><span>修改</span> </a>
-            <a th:href="@{/Commodity/delCommodity(name=${commodity.itemId})}">
-              <span>删除</span>
-            </a>
-          </td>
-        </tr>
-      <tr>
-        <td colspan="8">
-          <div class="action-bar">
-            <!--分页开始-->
-            <pager url="${ctx}/Commodity/findBySql" maxIndexPages="5" items="${pagers.total}" maxPageItems="15" export="curPage=pageNumber">
-                  <a href="/Commodity/allCategory">返回类型管理</a>
-            </pager>
-          </div>
 
-        </td>
-      </tr>
-    </table>
-  </div>
+<!--&lt;!&ndash; 左侧导航栏 &ndash;&gt;-->
+<!--<div class="leftbox">-->
+<!--  <ul>-->
+<!--    <li style="height: 200px;">-->
+<!--      <p style="margin: 0; padding: 0; display: flex; align-items: center; justify-content: center; height: 100%;">-->
+<!--        <img src="/img/logo.jpg" alt="Logo" style="max-width: 100%; max-height: 100%; object-fit: contain;">-->
+<!--      </p>-->
+<!--    </li>-->
+<!--    <li><p><a href="/index.html">首页</a></p></li>-->
+<!--    <li><p><a href="/Commodity/allCategory">商品管理</a></p></li>-->
+<!--    <li><p><a href="/home/userManagement">用户管理</a></p></li>-->
+<!--    <li><p><a href="/itemOrder/orderForm">订单管理</a></p></li>-->
+<!--  </ul>-->
+<!--</div>-->
+
+<!-- 主内容区域 -->
+<div class="wrapper">
+  <form method="post" th:action="@{/Commodity/search}">
+    <div>
+      <input type="text" placeholder="请输入商品名称" name="keyword" class="input" />
+      <button type="submit">查询</button>
+      <a th:href="@{/Commodity/toAddCommodity(category=${category})}">添加商品</a>
+    </div>
+  </form>
+
+  <table>
+    <tr>
+      <th>商品编号</th>
+      <th>商品种类</th>
+      <th>商品名称</th>
+      <th>商品图片</th>
+      <th>商品价格</th>
+      <th>商品折后价</th>
+      <th>商品数目</th>
+      <th>操作</th>
+    </tr>
+    <tr th:each="commodity:${CommodityList}">
+      <td th:text="${commodity.itemId}"></td>
+      <td th:text="${commodity.productId}"></td>
+      <td th:text="${commodity.name}"></td>
+      <td><img th:src="@{/image/gif/{id}(id=${commodity.itemId})}" alt="" /></td>
+      <td th:text="${commodity.listprice}"></td>
+      <td th:text="${commodity.unitcost}"></td>
+      <td th:text="${commodity.quantity}"></td>
+      <td>
+        <a th:href="@{/Commodity/toUpdateCommodity(name=${commodity.itemId})}"><span>修改</span></a>
+        <a th:href="@{/Commodity/delCommodity(name=${commodity.itemId})}"><span>删除</span></a>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="8">
+        <div class="action-bar">
+          <!-- 分页开始 -->
+          <pager url="${ctx}/Commodity/findBySql" maxIndexPages="5" items="${pagers.total}" maxPageItems="15" export="curPage=pageNumber">
+            <a href="/home/main?content=/Commodity/allCategory">返回类型管理</a>
+          </pager>
+        </div>
+      </td>
+    </tr>
+  </table>
 </div>
+
 <script>
-  function changeSearch(){
+  function changeSearch() {
     $("#{listform}").submit();
   }
 </script>

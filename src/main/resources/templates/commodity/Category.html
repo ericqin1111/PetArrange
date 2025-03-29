@@ -1,84 +1,107 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:c="http://www.w3.org/1999/html">
-<link rel="stylesheet" type="text/css" href="/styledemo.css">
 <head>
   <meta charset="UTF-8">
   <title>商品管理</title>
+  <!-- 引入Layui相关CSS -->
+  <link rel="stylesheet" th:href="@{/css/font.css}">
+  <link rel="stylesheet" th:href="@{/css/xadmin.css}">
+  <link rel="stylesheet" th:href="@{/lib/layui/css/layui.css}">
+  <link rel="stylesheet" href="/lib/layui/css/layui.css">
+  <style>
+    /* 自定义样式 */
+    .welcome-message {
+      font-size: 24px;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #333;
+    }
+    .layui-table {
+      margin-top: 20px;
+    }
+  </style>
 </head>
-<body style="font-size: 20px">
-<div>
+<body>
+<div class="layui-container">
+  <!-- 欢迎信息 -->
   <div class="welcome-message">商品类型管理</div>
-</div>
-<div class="wrapper">
-  <div class="leftbox">
-    <ul>
-      <li style="height: 200px;">
-        <p style="margin: 0; padding: 0; display: flex; align-items: center; justify-content: center; height: 100%;">
-          <img src="/img/logo.jpg" alt="Logo" style="max-width: 100%; max-height: 100%; object-fit: contain;">
-        </p>
-      </li>
-      <li>
-        <p><a href="/index.html">首页</a></p>
-      </li>
-      <li>
-        <p><a href="/Commodity/allCategory">商品管理</a></p>
-      </li>
-      <li>
-        <p><a href="/home/userManagement">用户管理</a></p>
-      </li>
-      <li>
-        <p><a href="/itemOrder/orderForm">订单管理</a></p>
-      </li>
-    </ul>
-  </div>
-  <div class="wrapper">
-    <form method="post" th:action="@{/Commodity/Search}">
-      <div>
-        <ul style="padding-left: 10px;align-items: center">
-          <li>
-            <input type="text" placeholder="请输入商品名称" name="keyword" class="input"
-                   style="width: 250px;line-height: 17px;display: inline-block" />
-            <button type="submit">查询</button>
-            <a href="/Commodity/toAddCategory">添加商品类型</a>
-          </li>
 
-              <li>
-                <!--              <input type="text" placeholder="请输入商品名称" name="keyword" class="input"-->
-                <!--                         style="width: 250px;line-height: 17px;display: inline-block" />-->
-                <!--              <button type="submit">查询</button>-->
-                <a href="/Commodity/toAddCommodity">添加商品</a>
-              </li>
-
-        </ul>
+  <!-- 查询与操作区域 -->
+  <form class="layui-form" id="searchForm" method="post" th:action="@{/Commodity/Search}">
+    <div class="layui-form-item">
+      <div class="layui-inline">
+        <input type="text" name="keyword" placeholder="请输入商品名称" autocomplete="off" class="layui-input" style="width: 250px;">
       </div>
-    </form>
-    <table class="action-bar">
-      <tr>
-        <th>类型编号</th>
-        <th>类型名称</th>
-<!--        <th>类型图片</th>-->
-        <th>操作</th>
-      </tr>
-      <c:forEach items="${pagers.category}" var="category" varStatus="l">
-        <tr th:each="category:${CategoryList}">
-          <td th:text="${category.catid}"></td>
-          <td th:text="${category.name}"></td>
-<!--          <td th:text="${category.descn}"></td>-->
-          <td>
-            <a class="" th:href="@{/Commodity/SomeCommodity(name=${category.catid})}"><span class="">修改</span> </a>
-            <a th:href="@{/Commodity/delCategory(name=${category.catid})}">
-              <span>删除</span>
-            </a>
-          </td>
+      <div class="layui-inline">
+        <button class="layui-btn" type="submit">查询</button>
+      </div>
+      <div class="layui-inline">
+        <a href="/Commodity/toAddCategory" class="layui-btn layui-btn-primary">添加商品类型</a>
+      </div>
+      <div class="layui-inline">
+        <a href="/Commodity/toAddCommodity" class="layui-btn layui-btn-normal">添加商品</a>
+      </div>
+    </div>
+  </form>
+
+  <script>
+    // 监听搜索表单提交事件
+    $('#searchForm').on('submit', function(e) {
+      e.preventDefault();  // 阻止默认表单提交
+      var formData = $(this).serialize();
+      $.ajax({
+        url: $(this).attr('action'),
+        type: 'POST',
+        data: formData,
+        success: function(response) {
+          $('#content').html(response);  // 只更新右侧内容区域
+        },
+        error: function() {
+          $('#content').html('<p>加载失败，请稍后再试。</p>');
+        }
+      });
+    });
+  </script>
+
+
+  <!-- 商品类型表格 -->
+  <div class="layui-row">
+    <div class="layui-col-md12">
+      <table class="layui-table" lay-even lay-skin="line">
+        <thead>
+        <tr>
+          <th>类型编号</th>
+          <th>类型名称</th>
+          <th>操作</th>
         </tr>
-      </c:forEach>
-    </table>
+        </thead>
+        <tbody>
+        <c:forEach items="${pagers.category}" var="category" varStatus="l">
+          <tr th:each="category:${CategoryList}">
+            <td th:text="${category.catid}"></td>
+            <td th:text="${category.name}"></td>
+            <td>
+              <a th:href="@{/Commodity/SomeCommodity(name=${category.catid})}" class="layui-btn layui-btn-xs">修改</a>
+              <a th:href="@{/Commodity/delCategory(name=${category.catid})}" class="layui-btn layui-btn-danger layui-btn-xs">删除</a>
+            </td>
+          </tr>
+        </c:forEach>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
+
+<!-- 引入Layui相关JS -->
+<script src="/lib/layui/layui.js"></script>
 <script>
-  function changeSearch(){
-    $("#{listform}").submit();
-  }
+  // 初始化Layui模块
+  layui.use(['form', 'element'], function() {
+    var form = layui.form;
+    var element = layui.element;
+
+    // 其他自定义逻辑
+  });
 </script>
 </body>
 </html>

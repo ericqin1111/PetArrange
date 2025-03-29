@@ -1,69 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
-<link rel="stylesheet" type="text/css" href="/styles.css">
 <head>
   <meta charset="UTF-8">
   <title>新增商品</title>
+  <style>
+    /* 全局样式 */
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      background-color: #f9f9f9;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* 头部样式 */
+    .welcome-message {
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: #4CAF50;
+      margin-top: 20px;
+    }
+
+    /* 表单外层容器 */
+    .wrapper {
+      max-width: 500px;
+      margin: 30px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* 表单组样式 */
+    .form-group {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+    }
+
+    /* 标签样式 */
+    .label {
+      width: 120px;
+      font-weight: bold;
+      color: #555;
+    }
+
+    /* 输入框样式 */
+    .input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+      transition: border-color 0.3s ease;
+    }
+
+    .input:focus {
+      border-color: #4CAF50;
+      outline: none;
+    }
+
+    /* 提示信息样式 */
+    .tips {
+      margin-left: 10px;
+      color: #e74c3c;
+      font-size: 14px;
+    }
+
+    /* 按钮样式 */
+    .button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .button.bg-main {
+      background-color: #4CAF50;
+      color: #fff;
+    }
+
+    .button.bg-main:hover {
+      background-color: #45a049;
+    }
+
+    /* 返回链接样式 */
+    a {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #4CAF50;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
-<body style="font-size: 20px">
-<div class="welcome-message">新增商品</div>
+<body>
+<div class="welcome-message">新增商品类别</div>
 <div class="wrapper">
-  <div class="leftbox">
-    <ul>
-      <li style="height: 200px;">
-        <p style="margin: 0; padding: 0; display: flex; align-items: center; justify-content: center; height: 100%;">
-          <img src="/img/logo.jpg" alt="Logo" style="max-width: 100%; max-height: 100%; object-fit: contain;">
-        </p>
-      </li>
-      <li>
-        <p><a href="/index.html">首页</a></p>
-      </li>
-      <li>
-        <p><a href="/Commodity/allCategory">商品管理</a></p>
-      </li>
-      <li>
-        <p><a href="/home/userManagement">用户管理</a></p>
-      </li>
-      <li>
-        <p><a href="/itemOrder/orderForm">订单管理</a></p>
-      </li>
-    </ul>
-  </div>
-  <div>
-    <div class="body-content" style="display: flex">
-      <form th:action="@{/Commodity/addCategory}" method="post" class="form-x">
-        <div class="form-group">
-          <div class="label"><label>商品编号：</label></div>
-          <div class="field">
-            <input type="text" class="input w50" name="catid" data-validate="required:请输入商品名称" />
-            <div class="tips"></div>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="label"><label>商品名称：</label></div>
-          <div class="field">
-            <input type="text" class="input w50" name="name" data-validate="required:请输入商品名称" />
-            <div class="tips"></div>
-          </div>
-        </div>
-<!--        <div class="form-group">-->
-<!--          <div class="label"><label>图片：</label></div>-->
-<!--          <div class="field">-->
-<!--            <input type="text" class="input w50" name="url" data-validate="required:请输入商品名称" />-->
-<!--            <div class="tips"></div>-->
-<!--          </div>-->
-<!--        </div>-->
-        <div class="form-group">
-          <div class="label"></div>
-          <div class="field">
-            <button class="button bg-main icon-check-square-o" type="submit">提交</button>
-            <button class="button bg-main icon-check-square-o" type="reset">重置</button>
-          </div>
-        </div>
-      </form>
-      <a href="/Commodity/allCategory">返回</a>
+  <form th:action="@{/Commodity/addCategory}" method="post" class="form-x">
+    <div class="form-group">
+      <div class="label"><label>商品编号：</label></div>
+      <div class="field">
+        <input type="text" class="input" name="catid" data-validate="required:请输入商品编号" />
+        <div class="tips"></div>
+      </div>
     </div>
-  </div>
+    <div class="form-group">
+      <div class="label"><label>商品名称：</label></div>
+      <div class="field">
+        <input type="text" class="input" name="name" data-validate="required:请输入商品名称" />
+        <div class="tips"></div>
+      </div>
+    </div>
+    <!-- 图片字段已注释 -->
+    <!-- <div class="form-group">
+      <div class="label"><label>图片：</label></div>
+      <div class="field">
+        <input type="text" class="input" name="url" data-validate="required:请输入图片URL" />
+        <div class="tips"></div>
+      </div>
+    </div> -->
+    <div class="form-group">
+      <div class="label"></div>
+      <div class="field">
+        <button class="button bg-main" type="submit">提交</button>
+        <button class="button bg-main" type="reset">重置</button>
+      </div>
+    </div>
+  </form>
+  <a href="/home/main?content=/Commodity/allCategory">返回</a>
+  <!--  <a href="/Commodity/allCategory">返回</a>-->
 </div>
 </body>
 </html>
